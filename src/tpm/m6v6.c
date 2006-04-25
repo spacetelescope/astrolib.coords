@@ -1,0 +1,39 @@
+/* file: $RCSfile: m6v6.c,v $
+** rcsid: $Id: m6v6.c,v 1.5 2003/09/09 21:52:53 jwp Exp $
+** Copyright Jeffrey W Percival
+** *******************************************************************
+** Space Astronomy Laboratory
+** University of Wisconsin
+** 1150 University Avenue
+** Madison, WI 53706 USA
+** *******************************************************************
+** Do not use this software without attribution.
+** Do not remove or alter any of the lines above.
+** *******************************************************************
+*/
+static char *rcsid = "$Id: m6v6.c,v 1.5 2003/09/09 21:52:53 jwp Exp $";
+
+/*
+** *******************************************************************
+** $RCSfile: m6v6.c,v $ - product of a 6-matrix and a 6-vector
+** *******************************************************************
+*/
+
+#include "vec.h"
+
+V6
+m6v6(M6 m, V6 v1)
+{
+    V6 v2;
+
+    if (v6GetType(v1) == SPHERICAL) {
+	v1 = v6s2c(v1);
+    }
+
+    v2 = v6init(CARTESIAN);
+
+    v2.v[0] = v3sum(m3v3(m.m[0][0], v1.v[0]), m3v3(m.m[0][1], v1.v[1]));
+    v2.v[1] = v3sum(m3v3(m.m[1][0], v1.v[0]), m3v3(m.m[1][1], v1.v[1]));
+
+    return(v2);
+}

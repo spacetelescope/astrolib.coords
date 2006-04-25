@@ -1,5 +1,7 @@
-from distutils.core import setup
-import sys, os.path, string, shutil
+from distutils.core import setup, Extension
+import sys, os.path, string, shutil, glob, os, re
+from distutils.command.install_data import install_data
+
 
 
 ver = sys.version_info
@@ -22,54 +24,64 @@ def dolocal():
                 ])
             sys.argv.remove(a)
 
-def getDataDir(args):
-    for a in args:
-        if string.find(a, '--home=') == 0:
-            dir = string.split(a, '=')[1]
-            data_dir = os.path.join(dir, 'lib/python/coords')
-        elif string.find(a, '--prefix=') == 0:
-            dir = string.split(a, '=')[1]
-            data_dir = os.path.join(dir, 'lib', python_exec, 'site-packages/coords')
-        elif a.startswith('--install-data='):
-            dir = string.split(a, '=')[1]
-            data_dir = dir
-        else:
-            data_dir = os.path.join(sys.prefix, 'lib', python_exec, 'site-packages/coords')
-    return data_dir
+class smart_install_data(install_data):
+    def run(self):
+        install_cmd = self.get_finalized_command('install')
+        self.install_dir = getattr(install_cmd, 'install_lib')
+        return install_data.run(self)
 
-def copy_doc(data_dir, args):
-    if 'install' in args:
-        doc_dir = os.path.join(data_dir,'doc')
-        if os.path.exists(doc_dir):
-	    try:
-                shutil.rmtree(doc_dir)
-            except:
-                print "Error removing doc directory\n"
-        #os.mkdir(doc_dir)
-	shutil.copytree('doc', doc_dir)
 
-def dosetup(data_dir):
+tpmsrc = glob.glob('src/tpm/*.c')
+tpmsrc.extend(['src/blackbox.c','src/pytpm_wrap.c'])
+
+        
+def dosetup():
     r = setup(name = "coords",
-              version = "0.1",
+              version = "0.2",
               description  = 'Astronomical coordinates & angular separations (OO)',
               fullname     = 'AstroLib Coords',
               license      = 'BSD',
               author = "Vicki Laidler",
               author_email = "help@stsci.edu",
+              url = "http://projects.scipy.org/astropy/astrolib",
               platforms = ["Linux","Solaris","Mac OS X"],
               packages=['coords'],
               package_dir={'coords':'lib'},
-	      data_files = [(data_dir,['lib/LICENSE.txt'])])
+              cmdclass = {'install_data':smart_install_data},
+	      data_files = [('coords',['lib/LICENSE.txt','src/tpm/TPM_LICENSE.txt'])],
+              ext_modules = [Extension('coords._pytpmmodule', tpmsrc,
+                                      include_dirs = ['src/tpm'],
+                                       )],
+              )
 
     return r
 
 def main():
     args = sys.argv
+    for a in args:
+        if a.startswith('sdist'):
+            try:
+                #put a path to swig here of bear the consequences
+                if os.system('/data/gaudete1/laidler/ssb/coord/swigstuff/swig-1.3.25/swig  -python -outdir lib src/pytpm.i') == 0:
+                    continue
+                else:
+                    s=os.popen3('swig -version', 'r')[2].read()
+                    if "command not found" in s:
+                        print "SWIG not  found\n"
+                        raise SystemExit, "SWIG not  found\n"
+                    else:
+                        p=re.compile('Version', re.IGNORECASE)
+                        swig_version = re.split(p, s)[1].split()[0]
+                        if swig_version < '1.3':
+                            print "SWIG v 1.3 or later needed"
+                            raise SystemExit, "SWIG v 1.3 or later needed"
+                        else:
+                            os.system('swig  -python -outdir lib src/pytpm.i')
+            except:
+                raise SystemExit, "Incomplete source distribution - swig files were not generated, see messages above.\n"
+
     dolocal()
-    data_dir = getDataDir(args)
-    print 'data_dir', data_dir
-    dosetup(data_dir)
-    copy_doc(data_dir, args)
+    dosetup()
 
 
 if __name__ == "__main__":

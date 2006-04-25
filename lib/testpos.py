@@ -14,7 +14,7 @@ class Tvalues:
         self.rad_negarb=(4.9453570561039886, -0.588840748986033)
         self.detail_string="""
          System: celestial
-        Equinox: J2000 \n"""
+        Equinox: j2000 \n"""
         
 def fuzzy_equal(a,b,epsilon):
     diff=abs(a-b)

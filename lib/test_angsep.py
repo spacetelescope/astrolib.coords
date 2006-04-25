@@ -131,7 +131,7 @@ def test_setunit():
     assert s1.value == 3600, "set unit to arcsec failed"
 #.............................................................
 
-def runem():
+def run():
     test_gt_sep()
     test_lt_sep()
     test_eq_sep()

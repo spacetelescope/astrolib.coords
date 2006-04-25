@@ -1,0 +1,42 @@
+/* file: $RCSfile: v3dot.c,v $
+** rcsid: $Id: v3dot.c,v 1.5 2003/09/09 21:52:53 jwp Exp $
+** Copyright Jeffrey W Percival
+** *******************************************************************
+** Space Astronomy Laboratory
+** University of Wisconsin
+** 1150 University Avenue
+** Madison, WI 53706 USA
+** *******************************************************************
+** Do not use this software without attribution.
+** Do not remove or alter any of the lines above.
+** *******************************************************************
+*/
+static char *rcsid = "$Id: v3dot.c,v 1.5 2003/09/09 21:52:53 jwp Exp $";
+
+/*
+** *******************************************************************
+** $RCSfile: v3dot.c,v $ - 3-vector dot product
+** *******************************************************************
+*/
+
+#include "vec.h"
+
+double
+v3dot(V3 v1, V3 v2)
+{
+    double x = 0;
+
+    if (v3GetType(v1) == SPHERICAL) {
+	v1 = v3s2c(v1);
+    }
+
+    if (v3GetType(v2) == SPHERICAL) {
+	v2 = v3s2c(v2);
+    }
+
+    x += v3GetX(v1) * v3GetX(v2);
+    x += v3GetY(v1) * v3GetY(v2);
+    x += v3GetZ(v1) * v3GetZ(v2);
+
+    return(x);
+}

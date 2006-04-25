@@ -1,0 +1,58 @@
+/* file: $RCSfile: fmt_delta.c,v $
+** rcsid: $Id: fmt_delta.c,v 1.9 2003/05/15 20:09:26 jwp Exp $
+** Copyright Jeffrey W Percival
+** *******************************************************************
+** Space Astronomy Laboratory
+** University of Wisconsin
+** 1150 University Avenue
+** Madison, WI 53706 USA
+** *******************************************************************
+** Do not use this software without attribution.
+** Do not remove or alter any of the lines above.
+** *******************************************************************
+*/
+static char *rcsid = "$Id: fmt_delta.c,v 1.9 2003/05/15 20:09:26 jwp Exp $";
+
+/*
+** *******************************************************************
+** $RCSfile: fmt_delta.c,v $ - format a scalar angle as angle from -90 to 90 degrees
+** *******************************************************************
+*/
+
+#include "times.h"
+
+char *
+fmt_delta(double delta)
+{
+    DMS dms;
+
+    if (delta <= -M_PI) {
+	delta += ceil(delta / (-2*M_PI)) * 2*M_PI;
+    }
+
+    if (delta > M_PI) {
+	delta -= floor(delta / (2*M_PI)) * 2*M_PI;
+    }
+
+    if (delta > M_PI/2) {
+	delta = M_PI - delta;
+    }
+
+    if (delta < -M_PI/2) {
+	delta = -M_PI - delta;
+    }
+
+#ifdef DEBUG
+    (void)fprintf(stdout, "fmt_delta: delta = %g\n", delta);
+#endif
+
+    dms = r2dms(delta);
+
+#ifdef DEBUG
+    (void)fprintf(stdout, "fmt_delta: dms.dd = %g\n", dmsGetDegrees(dms));
+    (void)fprintf(stdout, "fmt_delta: dms.mm = %g\n", dmsGetMinutes(dms));
+    (void)fprintf(stdout, "fmt_delta: dms.ss = %g\n", dmsGetSeconds(dms));
+#endif
+
+    return(fmt_dms(dms));
+}

@@ -18,6 +18,8 @@ Dependencies
 ============
 numarray
 
+pytpm -- a Python wrapper for the TPM library graciously contributed
+by Jeff Percival
 
 Example
 =======
@@ -47,11 +49,8 @@ Example
 @see: U{http://www.scipy.org/wikis/topical_software/AstroLibCoordsHome}
 
 @author:  Vicki Laidler
-@version: '0.0.1 (2005-11-30)'
+@version: '0.0.2 (2006-1-30)'
 
-@todo: improve tests
-@todo: combine with wrapped TPM library to handle limited coordinate
-transformations.
 
 @group Classes: position.Position, position.Coord, angsep.Angsep
 @group Modules: position, angsep
@@ -61,7 +60,7 @@ transformations.
 """
 from position import *
 from angsep import *
+import testpos, test_angsep, test_astrodate, test_tpm
 
-
-__version__ = '0.0.1'      #Release version number only
-__vdate__ = '2005-11-30'   #Date of this version, in this (FITS-style) format
+__version__ = '0.2'      #Release version number only
+__vdate__ = '2006-1-30'   #Date of this version, in this (FITS-style) format
