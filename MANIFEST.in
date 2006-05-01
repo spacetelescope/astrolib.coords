@@ -1,0 +1,6 @@
+include setup.py MANIFEST MANIFEST.in *.py 
+include   lib/pytpm.py
+include src/pytpm_wrap.c
+recursive-include lib *
+recursive-include src tpm/*
+recursive-include doc *.pdf html
