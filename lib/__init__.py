@@ -84,6 +84,7 @@ Percival" in any appropriate publications.
 """
 from position import *
 from angsep import *
+from astrodate import *
 import testpos, test_angsep, test_astrodate, test_tpm
 
 __version__ = '0.2'      #Release version number only
