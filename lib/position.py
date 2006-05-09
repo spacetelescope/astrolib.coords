@@ -187,7 +187,15 @@ class Position:
         if not isinstance(other,Position):
             raise ValueError, "angsep only defined for positions"
 
-        d=gcdist(self.rad(),other.rad())
+        if self._tpmstate != other._tpmstate:
+            #convert other state to self state
+            otherpos=other.tpmstate(self._tpmstate,equinox=self._tpmequinox)
+            #It presently returns a tuple of (dd)
+            #Convert the result to a Coord
+            other_rad=Degrees(otherpos)._calcradians()
+        else:
+            other_rad=other.rad()
+        d=gcdist(self.rad(),other_rad)
         ans=angsep.AngSep(d,units='rad')
         ans.setunits(self.units)
         return ans
@@ -322,6 +330,11 @@ class Degrees(Coord):
     def _calcinternal(self):
         return self.a1,self.a2
 
+    def _calcradians(self):
+        a1=(math.pi/180.0)*self.a1
+        a2=(math.pi/180.0)*self.a2
+        return a1,a2
+        
 class Radians(Coord):
     """Radians coord
 
