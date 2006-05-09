@@ -355,9 +355,9 @@ class Radians(Coord):
         @type input: (float,float)
         """
         self.a1, self.a2=input
-        if not 0 <= self.a1 <=2*math.pi:
+        if not -1*math.pi <= self.a1 <=2*math.pi:
             raise ValueError, "Longitude %f out of range [0,2pi]"%self.a1
-        if not 0 <= self.a2 <=2*math.pi:
+        if not -1*math.pi <= self.a2 <=math.pi:
             raise ValueError, "Latitude %f out of range [0,2pi]"%self.a2
 
     def __repr__(self):
