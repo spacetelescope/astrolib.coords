@@ -88,4 +88,10 @@ from astrodate import *
 import testpos, test_angsep, test_astrodate, test_tpm
 
 __version__ = '0.2'      #Release version number only
-__vdate__ = '2006-1-30'   #Date of this version, in this (FITS-style) format
+__vdate__ = '2006-5-10'   #Date of this version, in this (FITS-style) format
+
+def _test():
+    testpos.run()
+    test_angsep.run()
+    test_tpm.run()
+    test_astrodate.run()
