@@ -39,7 +39,7 @@ def test_celzero(t):
     """celestial zero -> galactic"""
     p1=P.Position((0.0,0.0))
     p2=P.Position(p1.galactic(),system="galactic")
-    assert p2.within(P.Position(t.celzero_gal),t.epsilon,units='arcsec'), "Fail: right=%s ans=%s"%(t.celzero_gal, p2.dd())
+    assert p2.within(P.Position(t.celzero_gal,system="galactic"),t.epsilon,units='arcsec'), "Fail: right=%s ans=%s"%(t.celzero_gal, p2.dd())
 
 def test_galzero(t):
     p1=P.Position((0.0,0.0),system='galactic')
