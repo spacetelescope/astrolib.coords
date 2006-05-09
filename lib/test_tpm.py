@@ -106,11 +106,53 @@ def test_polaris(t):
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.polaris_j2000),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.polaris_j2000,p2.dd())
                                                                                                         
+#...................................................................
+#Add some tests checking the new functionality to compute angular
+#separations between Positions defined in different states
 
+def test_celgal(t):
+    p1=P.Position(t.arb)
+    p2=P.Position(t.arb,system='galactic')
+    assert p1.angsep(p2) > 0, "Fail: ans = %s"%p1.angsep(p2)
+
+def test_bjsep(t):
+    p1=P.Position(t.arb)
+    p2=P.Position(t.arb,equinox='b1950')
+    assert p1.angsep(p2) > 0, "Fail: ans = %s"%p1.angsep(p2)
+
+
+#................................................................
+#Add some tests for range checking:
+
+def test_ddbad():
+    try:
+        p1=P.Position((123.4,123.5))
+        print "Fail: no error was raised"
+    except ValueError:
+        pass
+
+
+def test_hmsbad1():
+    try:
+        p1=P.Position('93:34:43 -34:43:34')
+        print "Fail: no error was raised"
+    except ValueError:
+        pass
     
+
+def test_hmsbad2():
+    try:
+        p1=P.Position('3:34:34 -23:443:34.6')
+        print "Fail: no error was raised"
+    except ValueError:
+        pass
+
+
+#...................................................................
 def run():
     run_hiprec(0.5)
     run_loprec(3)
+    run_noprec()
     
 def run_hiprec(epsilon=0.5):
     t=Tvalues(epsilon)
@@ -127,8 +169,16 @@ def run_hiprec(epsilon=0.5):
     test_b1950arbneg(t)
     test_j2000arbneg(t)
     test_polaris(t)
+    test_celgal(t)
+    test_bjsep(t)
 
+    
 def run_loprec(epsilon=3):
     t=Tvalues(epsilon)
     test_eclarb(t)
     test_eclarbneg(t)
+
+def run_noprec():
+    test_ddbad()
+    test_hmsbad1()
+    test_hmsbad2()

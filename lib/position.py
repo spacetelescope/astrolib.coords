@@ -321,8 +321,18 @@ class Degrees(Coord):
         @param input: coordinates in decimal degrees
         @type input: (float,float)
         """
-        self.a1,self.a2=input
 
+
+        self.a1,self.a2=input
+        #Check for valid range
+        #TPM supports -180<longitude<180
+        #More usual convention is 0<longitude<360
+        #Support both this way
+        if not -180 <= self.a1 <= 360:
+            raise ValueError, "Longitude %f out of range [-180,360]"%self.a1
+        if not -90 <= self.a2 <= 90:
+            raise ValueError, "Latitude %f out of range [-90,90]"%self.a2
+        
     def __repr__(self):
         """ @rtype: string """
         return "%f %f"%(self.a1,self.a2)
@@ -348,6 +358,10 @@ class Radians(Coord):
         @type input: (float,float)
         """
         self.a1, self.a2=input
+        if not 0 <= self.a1 <=2*math.pi:
+            raise ValueError, "Longitude %f out of range [0,2pi]"%self.a1
+        if not 0 <= self.a2 <=2*math.pi:
+            raise ValueError, "Latitude %f out of range [0,2pi]"%self.a2
 
     def __repr__(self):
         """ @rtype: string """
@@ -364,7 +378,7 @@ class Radians(Coord):
         return a1,a2
     
 class Hmsdms(Coord):
-    """Sexagesimal coord
+    """Sexagesimal coord: longitude in hours of time (enforced)
 
     @ivar a1: longitude in hours, minutes, seconds
     @ivar a2: latitude in degrees, minutes, seconds
@@ -381,10 +395,26 @@ class Hmsdms(Coord):
         a1,a2=input.split()
         #Then break each one into pieces on colons
         hh,mm,ss=a1.split(':')
+        #Check range
+        if not 0 <= int(hh) <= 24:
+            raise ValueError, "Hours %s out of range [0,24]"%hh
+        if not 0 <= int(mm) <= 60:
+            raise ValueError, "Minutes %s out of range [0,60]"%mm
+        if not 0 <= float(ss) <= 60:
+            raise ValueError, "Seconds %s out of range [0,60]"%ss
         self.a1=N.array([int(float(hh)),int(float(mm)),float(ss)])
+
         dd,mm,ss=a2.split(':')
+        if not -90 <= int(dd) <= 90:
+            raise ValueError, "Degrees %s out of range [-90,90]"%dd
+        if not 0 <= int(mm) <= 60:
+            raise ValueError, "Minutes %s out of range [0,60]"%mm
+        if not 0 <= float(ss) <= 60:
+            raise ValueError, "Seconds %s out of range [0,60]"%ss
+
         self.a2=N.array([int(float(dd)),int(float(mm)),float(ss)])
 
+        
     def __repr__(self):
         """ @rtype: string """
         return "%dh %dm %5.3fs %dd %dm %5.3fs"%(self.a1[0],self.a1[1],self.a1[2],self.a2[0],self.a2[1],self.a2[2])
