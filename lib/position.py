@@ -35,10 +35,7 @@ class Position:
     @ivar _internal: the internal representation of the position (decimal degrees)
     @type _internal: (float,float)
 
-    @todo: Make the angsep method correctly calculate separations
-    between positions even if they were originally specified in different
-    systems -- without breaking the present behavior of the unit-related
-    methods. 
+
     """
 
     def __init__(self,input,
