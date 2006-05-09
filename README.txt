@@ -6,11 +6,15 @@ observing proposals, and prepare for observing runs.
 It depends on numarray, which must already be installed on your
 system.
 
+It incorporates the TPM library, graciously contributed by Jeff
+Percival, to perform coordinate system transformations. This will be
+installed as part of the package installation.
+
 Install this package in the usual way:
 
 python setup.py install
 
-After installation, you can test the module as follows:
+After installation, you can test the package as follows:
 
 >>> import coords as C
 >>> C._test()
