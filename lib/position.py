@@ -411,10 +411,17 @@ class Hmsdms(Coord):
 
         self.a2=N.array([int(float(dd)),int(float(mm)),float(ss)])
 
+        #Check & fix for negativity
+        if a2.startswith('-'):
+            self.a2sign = '-'
+            self.a2*= -1
+        else:
+            self.a2sign = '+'
+
         
     def __repr__(self):
         """ @rtype: string """
-        return "%dh %dm %5.3fs %dd %dm %5.3fs"%(self.a1[0],self.a1[1],self.a1[2],self.a2[0],self.a2[1],self.a2[2])
+        return "%dh %dm %5.3fs %s%dd %dm %5.3fs"%(self.a1[0],self.a1[1],self.a1[2],self.a2sign,abs(self.a2[0]),abs(self.a2[1]),abs(self.a2[2]))
 
     def _calcinternal(self):
         """Convert hmsdms to decimal degrees
@@ -425,7 +432,7 @@ class Hmsdms(Coord):
         """
         a1= 15*self.a1[0] +   15*self.a1[1]/60.  +  15*self.a1[2]/3600.
         a2=abs(self.a2[0]) + abs(self.a2[1])/60. + abs(self.a2[2])/3600.
-        if self.a2[0] < 0: a2 = a2*(-1)
+        if self.a2sign == '-': a2 = a2*(-1)
         return a1,a2
 
 #---------------------------------------------------------------

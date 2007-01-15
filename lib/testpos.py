@@ -125,7 +125,17 @@ def test_within3(t):
     ans=p1.within(p1,0.2)
     assert ans, "Fail within3"
 #    print "test_within3: pass"
-              
+
+def test_negdeg():
+    p1=P.Position('1:2:3 -0:32:22.3')
+    dd=p1.dd()
+    assert dd[-1] < 0, "Fail negdeg"
+
+def test_negmin():
+    p1=P.Position('1:2:3 -0:0:22.3')
+    dd=p1.dd()
+    assert dd[-1] < 0, "Fail negmin"
+   
 def run():
     t=Tvalues()
     test_zero_hms(t)
@@ -144,3 +154,5 @@ def run():
     test_within1(t)
     test_within2(t)
     test_within3(t)
+    test_negdeg()
+    test_negmin()
