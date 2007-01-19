@@ -11,7 +11,7 @@ import numarray as N
 import angsep
 import astrodate #helper class: to be brought inside eventually
 
-import pytpm
+import pytpm, pytpm_wrapper
         
 class Position:
 
@@ -229,7 +229,7 @@ class Position:
         """
 
         x,y=self.dd()
-        l,b=pytpm.blackbox(x,y,self._tpmstate,pytpm.s04,pytpm.j2000,self._tpmequinox)
+        l,b=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s04,pytpm.j2000,self._tpmequinox)
         return l,b
 
     def j2000(self):
@@ -238,7 +238,7 @@ class Position:
         @rtype: (float, float)
         """
         x,y=self.dd()
-        r,d=pytpm.blackbox(x,y,self._tpmstate,pytpm.s06,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s06,pytpm.j2000,self._tpmequinox)
         return r,d
     
     def b1950(self):
@@ -249,7 +249,7 @@ class Position:
 
         """
         x,y=self.dd()
-        r,d=pytpm.blackbox(x,y,self._tpmstate,pytpm.s05,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s05,pytpm.j2000,self._tpmequinox)
         return r,d
 
     def ecliptic(self):
@@ -260,7 +260,7 @@ class Position:
 
         """
         x,y=self.dd()
-        r,d=pytpm.blackbox(x,y,self._tpmstate,pytpm.s03,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s03,pytpm.j2000,self._tpmequinox)
         return r,d
 
     def tpmstate(self,endstate,epoch=None,equinox=None):
@@ -289,7 +289,7 @@ class Position:
         if equinox is None:
             equinox=self._tpmequinox
         x1,y1=self.dd()
-        x2,y2=pytpm.blackbox(x1,y1,self._tpmstate,endstate,epoch,equinox)
+        x2,y2=pytpm_wrapper.blackbox(x1,y1,self._tpmstate,endstate,epoch,equinox)
         return x2,y2
     
 #-----------------------------------------------------------------
@@ -433,6 +433,7 @@ class Hmsdms(Coord):
         a1= 15*self.a1[0] +   15*self.a1[1]/60.  +  15*self.a1[2]/3600.
         a2=abs(self.a2[0]) + abs(self.a2[1])/60. + abs(self.a2[2])/3600.
         if self.a2sign == '-': a2 = a2*(-1)
+  
         return a1,a2
 
 #---------------------------------------------------------------
