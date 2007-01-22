@@ -50,11 +50,12 @@ True
 >>> ob.j2000()
 (188.68891666666667, -23.709055555555555)
 >>> ob.b1950()
-(-171.96943519057595, -23.433637283819877)
+(188.03056480942405, -23.433637283819877)
 >>> ob.galactic()
-(-61.983610612512024, 39.003358150874568)
+(298.01638938748795, 39.003358150874568)
 >>> ob.ecliptic()
-(-162.41539533987057, -18.294212209103392)
+(197.58457414028533, -18.294241465720475)
+
 
 
 
@@ -72,7 +73,7 @@ Percival" in any appropriate publications.
 @see: U{http://www.scipy.org/AstroLibCoordsHome}
 
 @author:  Vicki Laidler
-@version: '0.0.2 (2006-1-30)'
+@version: '0.25 (2007-1-22)'
 
 
 
@@ -87,8 +88,8 @@ from angsep import *
 from astrodate import *
 import testpos, test_angsep, test_astrodate, test_tpm
 
-__version__ = '0.2'      #Release version number only
-__vdate__ = '2006-5-10'   #Date of this version, in this (FITS-style) format
+__version__ = '0.25'      #Release version number only
+__vdate__ = '2007-1-22'   #Date of this version, in this (FITS-style) format
 
 def _test():
     testpos.run()
