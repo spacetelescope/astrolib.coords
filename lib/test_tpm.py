@@ -151,7 +151,7 @@ def test_hmsbad2():
 #...................................................................
 def run():
     run_hiprec(0.5)
-    run_loprec(3)
+    run_loprec(4)
     run_noprec()
     
 def run_hiprec(epsilon=0.5):
