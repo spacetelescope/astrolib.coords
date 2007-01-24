@@ -1,0 +1,36 @@
+Version 0.25 is a bugfix release of the coords package.
+
+The following issues have been addressed:
+    - Negative degrees in sexagesimal specification is now handled
+    - Longitude/RA convention for TPM-based method calls is now
+    consistent with the rest of the package
+    - Example text has been updated
+
+
+
+An explanatory note about time:
+
+There are three times of interest associated with a celestial
+coordinate. TPM calls these
+- the equinox == time at which precession is zero
+- the epoch == time at which proper motion is zero
+- the timetag of the coordinate 
+
+At present (v0.25), the Coords package enforces equinox=B1950 for
+galactic coordinates and J1984 for ecliptic coordinates; celestial
+coordinates may be specified at J2000 or B1950, or at an arbitary
+Julian (decimal) year. For all coordinate systems, it enforces 
+epoch=J2000 and timetag="time now" -- that is, it uses the current 
+system time. 
+
+Galactic and celestial coordinate systems are very insensitive to
+changes in "time now", but due to the nature of the ecliptic reference
+frame, ecliptic coordinates are quite sensitive. 
+
+The v0.3 release of the Coords package is planned to include the
+ability to specify the timetag of the coordinate.
+
+
+Release history:
+  - v0.2: included TPM capability to handle precession
+  - v0.1: initial release
