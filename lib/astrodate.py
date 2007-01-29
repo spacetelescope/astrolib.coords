@@ -44,6 +44,66 @@ def byear2jd(byear):
     """
     return (B1950 + ((byear)-1950.0)*(CB/100.0))
 
+def utc2jd(utc):
+    """
+    Convert UTC to Julian date.
+    
+    Conversion translated from TPM modules utcnow.c and gcal2j.c, which
+    notes that the algorithm to convert from a gregorian proleptic calendar
+    date onto a julian day number is taken from 
+    The Explanatory Supplement to the Astronomical Almanac (1992),
+    section 12.92, equation 12.92-1, page 604.
+
+    @param utc: UTC (Universal Civil Time)
+    @type utc: U{datetime<http://docs.python.org/lib/datetime.html>} object
+    @return: Julian date (to the nearest second)
+    @rtype: float
+
+
+    
+    """
+
+##  But, beware of different rounding behavior between C and Python!
+##    - integer arithmetic truncates -1.07 to -2 in Python; to -1 in C
+##    - to reproduce C-like behavior in Python, do the math with float
+##  arithmetic, then explicitly cast to int.
+
+
+    y=float(utc.year)
+    m=float(utc.month)
+    d=float(utc.day)
+    hr=utc.hour
+    min=utc.minute
+    sec=utc.second
+
+    #Address differences between python and C time conventions
+    #       C:                Python datetime
+    # 0 <= mon  <= 11        1 <= month <= 12
+    #
+
+    #C code to get the julian date of the start of the day */
+    #takes as input 1900+ptm->tm_year, ptm->tm_mon+1, ptm->tm_mday
+    # So we can use just (year, month, mday)
+
+    mterm=int((m-14)/12)
+    aterm=int((1461*(y+4800+mterm))/4)
+
+    bterm=int((367*(m-2-12*mterm))/12)
+
+    cterm=int((3*int((y+4900+mterm)/100))/4)
+
+    j=aterm+bterm-cterm+d
+    j -= 32075
+    #offset to start of day
+    j -= 0.5
+
+
+#    print "h/m/s: %f/%f/%f"%(hr,min,sec)
+    
+    #Apply the time
+    jd = j + (hr + (min + (sec/60.0))/60.0)/24.0
+
+    return jd
 
 def AstroDate(datespec):
     """AstroDate can be used as a class for managing astronomical
@@ -72,7 +132,7 @@ def AstroDate(datespec):
     string, but begins with a letter that is not 'B','J','JD', or 'MJD'
     (case insensitive).
 
-    @todo: Write tests
+    @todo: Add support for python time/datetime tuples 
     @todo: Add math functions! Addition, subtraction.
     @todo: Is there a need to support other date specifications?
     eg FITS-style dates?
