@@ -11,8 +11,12 @@ transparent wrapper for TPM."""
 def blackbox(x,y,instate,outstate,epoch,equinox,timetag=None):
     if timetag == None:
         timetag=astrodate.AstroDate()
-
-    r,d=pytpm.blackbox(x,y,instate,outstate,epoch,equinox,timetag.jd)
+    try:
+        r,d=pytpm.blackbox(x,y,instate,outstate,epoch,equinox,timetag.jd)
+    except AttributeError: #support forgetful users
+        astrotag=astrodate.AstroDate(timetag)
+        r,d=pytpm.blackbox(x,y,instate,outstate,epoch,equinox,astrotag.jd)
+        
     #Convert longitude to astrolib/coords convention
     r=r%360.0
     return r,d
