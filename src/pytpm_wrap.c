@@ -1578,22 +1578,24 @@ static PyObject *_wrap_blackbox(PyObject *self, PyObject *args) {
     int arg4 ;
     double arg5 ;
     double arg6 ;
-    double *arg7 = (double *) 0 ;
+    double arg7 ;
     double *arg8 = (double *) 0 ;
-    double temp7 ;
-    int res7 = 0 ;
+    double *arg9 = (double *) 0 ;
     double temp8 ;
     int res8 = 0 ;
+    double temp9 ;
+    int res9 = 0 ;
     PyObject * obj0 = 0 ;
     PyObject * obj1 = 0 ;
     PyObject * obj2 = 0 ;
     PyObject * obj3 = 0 ;
     PyObject * obj4 = 0 ;
     PyObject * obj5 = 0 ;
+    PyObject * obj6 = 0 ;
     
-    arg7 = &temp7; res7 = SWIG_NEWOBJ;
     arg8 = &temp8; res8 = SWIG_NEWOBJ;
-    if(!PyArg_ParseTuple(args,(char *)"OOOOOO:blackbox",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) goto fail;
+    arg9 = &temp9; res9 = SWIG_NEWOBJ;
+    if(!PyArg_ParseTuple(args,(char *)"OOOOOOO:blackbox",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) goto fail;
     {
         arg1 = (double)(SWIG_As_double(obj0)); 
         if (SWIG_arg_fail(1)) SWIG_fail;
@@ -1618,13 +1620,17 @@ static PyObject *_wrap_blackbox(PyObject *self, PyObject *args) {
         arg6 = (double)(SWIG_As_double(obj5)); 
         if (SWIG_arg_fail(6)) SWIG_fail;
     }
-    blackbox(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    {
+        arg7 = (double)(SWIG_As_double(obj6)); 
+        if (SWIG_arg_fail(7)) SWIG_fail;
+    }
+    blackbox(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
     
     Py_INCREF(Py_None); resultobj = Py_None;
-    resultobj = t_output_helper(resultobj, ((res7 == SWIG_NEWOBJ) ?
-    SWIG_From_double((*arg7)) : SWIG_NewPointerObj((void*)(arg7), SWIGTYPE_p_double, 0)));
     resultobj = t_output_helper(resultobj, ((res8 == SWIG_NEWOBJ) ?
     SWIG_From_double((*arg8)) : SWIG_NewPointerObj((void*)(arg8), SWIGTYPE_p_double, 0)));
+    resultobj = t_output_helper(resultobj, ((res9 == SWIG_NEWOBJ) ?
+    SWIG_From_double((*arg9)) : SWIG_NewPointerObj((void*)(arg9), SWIGTYPE_p_double, 0)));
     return resultobj;
     fail:
     return NULL;

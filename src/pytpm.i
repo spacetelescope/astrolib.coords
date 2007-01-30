@@ -35,7 +35,7 @@
 
 void blackbox(double x1, double y1, // input position in degrees
 	      int s1, int s2,       // input state, output state
-	      double epoch, double equinox, // this is probably wrong...
+	      double epoch, double equinox, double timetag, 
 	      double *OUTPUT, double *OUTPUT);
 
 

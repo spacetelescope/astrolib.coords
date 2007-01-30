@@ -2,7 +2,7 @@
 
 
 void blackbox(double x1, double y1, int s1, int s2,
-	      double epoch, double equinox,
+	      double epoch, double equinox, double timetag,
 	      double *x2, double *y2)
 
 {
@@ -23,7 +23,7 @@ void blackbox(double x1, double y1, int s1, int s2,
   v6SetR(v6,1e9);
 
   tpm_data(&tstate, TPM_INIT); 
-  tstate.utc = utc_now(); 
+  tstate.utc = timetag; 
   tpm_data(&tstate, TPM_ALL);
 
   pvec[s1]=v6;
