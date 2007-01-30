@@ -9,6 +9,7 @@ include file of the tpm package by Jeff Percival, to ensure compatibility.
 """
 
 import types
+import datetime
 
 #first define some globally-useful constants
 B1950 = 2433282.42345905
@@ -105,7 +106,7 @@ def utc2jd(utc):
 
     return jd
 
-def AstroDate(datespec):
+def AstroDate(datespec=None):
     """AstroDate can be used as a class for managing astronomical
     date specifications (despite the fact that it was implemented
     as a factory function) that returns either a BesselDate or a
@@ -124,7 +125,10 @@ def AstroDate(datespec):
          - Besselian year: 'B1950','B1958.432': return a BesselDate
          - Julian date: 'JD2437241.81', '2437241.81', 2437241.81: return a JulianDate
          - Modified Julian date: 'MJD37241.31': returns a JulianDate
-    @type datespec: string, float, or integer
+         - A U{datetime <http://docs.python.org/lib/datetime.html>} object: return a JulianDate
+         - None: returns the current time as a JulianDate
+         
+    @type datespec: string, float, integer,  U{datetime <http://docs.python.org/lib/datetime.html>}, or None
 
     @rtype: L{JulianDate} or L{BesselDate}
 
@@ -132,12 +136,14 @@ def AstroDate(datespec):
     string, but begins with a letter that is not 'B','J','JD', or 'MJD'
     (case insensitive).
 
-    @todo: Add support for python time/datetime tuples 
+    @todo: ***Clarify whether any datetime will do, or only UTC ones***
     @todo: Add math functions! Addition, subtraction.
     @todo: Is there a need to support other date specifications?
     eg FITS-style dates?
     """
 
+    if datespec is None:
+        return JulianDate(datetime.datetime.utcnow())
     
     try:
         dstring=datespec.upper()
@@ -176,7 +182,13 @@ class JulianDate:
 
     def __init__(self,datespec):
         self.datespec=datespec
-        if type(datespec) is types.StringType:
+        
+        if isinstance(datespec,datetime.datetime):
+            self.jd=utc2jd(datespec)
+            self.mjd=self.jd-MJD_0
+            self.year=jd2jyear(self.jd)
+            
+        elif type(datespec) is types.StringType:
             if datespec.upper().startswith('JD'):
                 #it's a julian date
                 self.jd=float(datespec[2:])

@@ -1,4 +1,5 @@
 import pytpm
+import astrodate, datetime
 """ This routine wraps the pytpm.blackbox routine in order to apply
 the longitude convention preferred in coords. All astrolib.coords routines
 should call pytpm_wrapper.blackbox() instead of pytpm.blackbox().
@@ -8,7 +9,9 @@ so it was simpler to do it in python. Also, this leaves pytpm itself as a more
 transparent wrapper for TPM."""
 
 def blackbox(x,y,instate,outstate,epoch,equinox):
-    r,d=pytpm.blackbox(x,y,instate,outstate,epoch,equinox)
+    #Temporarily pass in utc now as the timetag:
+    timetag=astrodate.AstroDate().jd
+    r,d=pytpm.blackbox(x,y,instate,outstate,epoch,equinox,timetag)
     #Convert longitude to astrolib/coords convention
     r=r%360.0
     return r,d
