@@ -221,49 +221,61 @@ class Position:
 # Coordinate transformations using TPM.
 # All "tstate" management is done inside blackbox.
 
-    def galactic(self):
+    def galactic(self,timetag=None):
         """ Return the position in IAU 1958 Galactic coordinates.
 
+        @param timetag: Timetag of returned coordinate
+        @type timetag: L{astrodate.AstroDate}
+        
         @return: (l,b) tuple in decimal degrees
         @rtype: (float,float)
         """
 
         x,y=self.dd()
-        l,b=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s04,pytpm.j2000,self._tpmequinox)
+        l,b=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s04,pytpm.j2000,self._tpmequinox,timetag)
         return l,b
 
-    def j2000(self):
+    def j2000(self,timetag=None):
         """ Return the position in Mean FK5 J2000 coordinates
+        @param timetag: Timetag of returned coordinate
+        @type timetag: L{astrodate.AstroDate}
+
         @return: (ra, dec) tuple in decimal degrees
         @rtype: (float, float)
         """
         x,y=self.dd()
-        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s06,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s06,pytpm.j2000,self._tpmequinox,timetag)
         return r,d
     
-    def b1950(self):
+    def b1950(self,timetag=None):
         """ Return the position in Mean FK4 B1950 coordinates
+
+        @param timetag: Timetag of returned coordinate
+        @type timetag: L{astrodate.AstroDate}
 
         @return: (ra, dec) tuple in decimal degrees
         @rtype: (float,float)
 
         """
         x,y=self.dd()
-        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s05,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s05,pytpm.j2000,self._tpmequinox,timetag)
         return r,d
 
-    def ecliptic(self):
+    def ecliptic(self,timetag=None):
         """ Return the position in IAU 1980 Ecliptic coordinates 
+
+        @param timetag: Timetag of returned coordinate
+        @type timetag: L{astrodate.AstroDate}
 
         @return: (le,be) tuple in decimal degrees
         @rtype: (float,float)
 
         """
         x,y=self.dd()
-        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s03,pytpm.j2000,self._tpmequinox)
+        r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s03,pytpm.j2000,self._tpmequinox,timetag)
         return r,d
 
-    def tpmstate(self,endstate,epoch=None,equinox=None):
+    def tpmstate(self,endstate,epoch=None,equinox=None,timetag=None):
 
         """ This method allows the expert user to call the blackbox
         routine of the TPM library directly, for access to more state
@@ -280,6 +292,9 @@ class Position:
         @param equinox: in Julian date; default self._tpmequinox
         @type equinox: float
 
+        @param timetag: Timetag of returned coordinate
+        @type timetag: L{astrodate.AstroDate}
+
         @return: transformed coordinates in decimal degrees
         @rtype: (float,float)
         """
@@ -289,7 +304,7 @@ class Position:
         if equinox is None:
             equinox=self._tpmequinox
         x1,y1=self.dd()
-        x2,y2=pytpm_wrapper.blackbox(x1,y1,self._tpmstate,endstate,epoch,equinox)
+        x2,y2=pytpm_wrapper.blackbox(x1,y1,self._tpmstate,endstate,epoch,equinox,timetag)
         return x2,y2
     
 #-----------------------------------------------------------------
