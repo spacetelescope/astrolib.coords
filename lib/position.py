@@ -95,9 +95,7 @@ class Position:
         @return: system & equinox
         @rtype: string
         """
-        ans="""
-         System: %s
-        Equinox: %s \n""" %(self.system,self.equinox)
+        ans=""" System: %s \n Equinox: %s """ %(self.system,self.equinox)
         return ans
 
     def __repr__(self):

@@ -184,6 +184,7 @@ class JulianDate:
         self.datespec=datespec
         
         if isinstance(datespec,datetime.datetime):
+            #Note assumption that datespec is already in UTC
             self.jd=utc2jd(datespec)
             self.mjd=self.jd-MJD_0
             self.year=jd2jyear(self.jd)

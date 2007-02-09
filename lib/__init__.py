@@ -73,7 +73,7 @@ Percival" in any appropriate publications.
 @see: U{http://www.scipy.org/AstroLibCoordsHome}
 
 @author:  Vicki Laidler
-@version: '0.25 (2007-1-22)'
+@version: '0.3 (2007-2-??)'
 
 
 
@@ -83,16 +83,15 @@ Percival" in any appropriate publications.
 
 @sort: position, angsep
 """
-from position import *
-from angsep import *
-from astrodate import *
-import testpos, test_angsep, test_astrodate, test_tpm
+from position import Position
+from angsep import AngSep
+from astrodate import AstroDate
 
-__version__ = '0.25'      #Release version number only
-__vdate__ = '2007-1-22'   #Date of this version, in this (FITS-style) format
+
+__version__ = '0.3'      #Release version number only
+__vdate__ = '2007-2-??'   #Date of this version, in this (FITS-style) format
 
 def _test():
-    testpos.run()
-    test_angsep.run()
-    test_tpm.run()
-    test_astrodate.run()
+    import doctest
+    import test_snapshot
+    doctest.testmod(test_snapshot)

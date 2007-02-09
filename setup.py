@@ -37,7 +37,7 @@ tpmsrc.extend(['src/blackbox.c','src/pytpm_wrap.c'])
         
 def dosetup():
     r = setup(name = "coords",
-              version = "0.25",
+              version = "0.3",
               description  = 'Astronomical coordinates & angular separations (OO)',
               fullname     = 'AstroLib Coords',
               license      = 'BSD',
@@ -61,7 +61,7 @@ def main():
     for a in args:
         if a.startswith('sdist'):
             try:
-                #put a path to swig here of bear the consequences
+                #put a path to swig here or bear the consequences
                 if os.system('/data/gaudete1/laidler/ssb/coord/swigstuff/swig-1.3.25/swig  -python -outdir lib src/pytpm.i') == 0:
                     continue
                 else:
