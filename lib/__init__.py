@@ -25,8 +25,9 @@ Example
 =======
 
 >>> import coords as C
-#
-#Unit conversions
+>>> print C.__version__
+0.3
+>>> #Unit conversions
 >>> ob=C.Position('12:34:45.34 -23:42:32.6')
 >>> ob.hmsdms()
 '12:34:45.340 -23:42:32.600'
@@ -34,8 +35,8 @@ Example
 (188.68891666666667, -23.709055555555555)
 >>> ob.rad()
 (3.2932428578545374, -0.41380108198269777)
-#
-#Angular separations
+
+>>> #Angular separations
 >>> p1=C.Position("01:23:45.300 +65:43:31.240")
 >>> p2=C.Position("01:23:45.62 +65:43:31.20")
 >>> p1.angsep(p2)
@@ -45,21 +46,70 @@ Example
 1.973739377865491
 >>> p1.within(p2,3.0,units='arcsec')
 True
-#
-# Coordinate conversions
+>>> epsilon=C.AngSep(5.0)
+>>> epsilon
+5.000000 arcsec
+>>> delta > epsilon
+False
+
+>>> #Astronomical Date specifications
+>>> d=C.AstroDate('1997.3') #Defaults to Julian year; J or B prefix also ok
+>>> d.year
+1997.3
+>>> d.jd
+2450558.8250000002
+>>> d.mjd
+50558.325000000186
+>>> d2=C.AstroDate('MJD50658.25') #JD also ok for plain Julian Date
+>>> d2.year
+1997.5735797399041
+>>> d2 < d
+False
+
+>>> # Coordinate conversions
 >>> ob.j2000()
 (188.68891666666667, -23.709055555555555)
 >>> ob.b1950()
 (188.03056480942405, -23.433637283819877)
 >>> ob.galactic()
 (298.01638938748795, 39.003358150874568)
->>> ob.ecliptic()
-(197.58457414028533, -18.294241465720475)
+>>> ob.ecliptic(timetag=C.AstroDate('J2000'))
+(197.5848634558852, -18.293964120804738)
+>>> p3=C.Position("01:23:45 -65:43:21.4",equinox='J2000')
+>>> p4=C.Position("01:23:45 -65:43:21.4",equinox='B1950')
+>>> p3.j2000()
+(20.9375, -65.722611111111107)
+>>> p4.j2000()
+(21.356870704681981, -65.462921080444147)
+>>> p3.angsep(p4)
+0.312199 degrees
+>>> p5=C.Position((0.0,0.0),system='galactic')
+>>> p5.j2000()
+(266.40499571858879, -28.936169261309555)
 
 
+ >>> #Specify position in hmsdms
+ >>> polaris=C.Position("02:31:49.08 +89:15:50.8")
+ >>> polaris.dd()
+ (37.954500000000003, 89.264111111111106)
+ >>> polaris.hmsdms()
+ '02:31:49.080 +89:15:50.800'
+ >>> print polaris.details()
+  System: celestial 
+  Equinox: j2000 
+
+ >>> #Specify position in decimal degrees
+ >>> ob=C.Position((52.9860209, -27.7510006))
+ >>> ob.hmsdms()
+ '03:31:56.645 -27:45:03.602'
+ >>> ob.dd()
+ (52.9860209, -27.751000600000001)
+ >>>
+ >>> #Use as calculator without saving the intermediate object
+ >>> C.Position("12:34:45.4 -22:21:45.4").dd()
+ (188.68916666666667, -22.362611111111111)
 
 
-For more examples, see the wiki page listed below.
 
 TPM Citation
 ============
@@ -93,5 +143,4 @@ __vdate__ = '2007-2-??'   #Date of this version, in this (FITS-style) format
 
 def _test():
     import doctest
-    import test_snapshot
-    doctest.testmod(test_snapshot)
+    doctest.testfile('__init__.py')
