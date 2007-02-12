@@ -1,6 +1,6 @@
 """Developer-use convenience module to run all unit tests."""
 
-import testpos, test_angsep, test_tpm, test_astrodate, test_snapshot
+import testpos, test_angsep, test_tpm, test_astrodate
 def run():
     import coords
     coords._test() #snapshot test
