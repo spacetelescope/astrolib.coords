@@ -1,3 +1,25 @@
+Version 0.3 expands support for time specification in AstroDate and Position.
+
+The following changes have been made:
+   - timetag specification is now supported for TPM-related methods of
+   Position objects. (See "An explanatory note about time", in the
+   v0.25 release notes below, for more discussion.)
+
+   - the AstroDate factory function was enhanced to accept a
+   datetime.datetime object (assumed to be in UTC) as a time
+   specification, and to produce a JulianDate of "utc now" when no
+   argument is supplied.
+
+   - tests were refactored; coords._test() now runs a doctest that
+   matches the set of (now expanded) examples given to demonstrate
+   package functionality. Unit tests were removed from the
+   distribution and documentation. The package import statements were
+   also trimmed down to avoid unnecessarily cluttering the namespace.
+
+------------------------------------------------------------
+Prior release notes are included below
+------------------------------------------------------------
+ 
 Version 0.25 is a bugfix release of the coords package.
 
 The following issues have been addressed:

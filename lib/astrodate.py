@@ -125,7 +125,7 @@ def AstroDate(datespec=None):
          - Besselian year: 'B1950','B1958.432': return a BesselDate
          - Julian date: 'JD2437241.81', '2437241.81', 2437241.81: return a JulianDate
          - Modified Julian date: 'MJD37241.31': returns a JulianDate
-         - A U{datetime <http://docs.python.org/lib/datetime.html>} object: return a JulianDate
+         - A U{datetime <http://docs.python.org/lib/datetime.html>} object: return a JulianDate (assumes input time is UTC)
          - None: returns the current time as a JulianDate
          
     @type datespec: string, float, integer,  U{datetime <http://docs.python.org/lib/datetime.html>}, or None
@@ -136,7 +136,6 @@ def AstroDate(datespec=None):
     string, but begins with a letter that is not 'B','J','JD', or 'MJD'
     (case insensitive).
 
-    @todo: ***Clarify whether any datetime will do, or only UTC ones***
     @todo: Add math functions! Addition, subtraction.
     @todo: Is there a need to support other date specifications?
     eg FITS-style dates?
