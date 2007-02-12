@@ -2,5 +2,6 @@ include setup.py MANIFEST MANIFEST.in README.txt ReleaseNotes.txt *.py
 include   lib/pytpm.py
 include src/pytpm_wrap.c
 recursive-include lib *
+prune lib/test* jdnow.py 
 recursive-include src tpm/*
 recursive-include doc *.pdf html

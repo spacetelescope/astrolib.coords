@@ -139,7 +139,7 @@ from astrodate import AstroDate
 
 
 __version__ = '0.3'      #Release version number only
-__vdate__ = '2007-2-??'   #Date of this version, in this (FITS-style) format
+__vdate__ = '2007-2-12'   #Date of this version, in this (FITS-style) format
 
 def _test():
     import doctest
