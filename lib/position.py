@@ -7,7 +7,7 @@ Position object to manage coordinate transformations
 import types
 import math
 
-import numarray as N
+import numpy as N
 import angsep
 import astrodate #helper class: to be brought inside eventually
 
