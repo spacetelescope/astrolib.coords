@@ -1,5 +1,5 @@
 /* file: $RCSfile: d2d.c,v $
-** rcsid: $Id: d2d.c,v 1.13 2003/05/15 20:08:30 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: d2d.c,v 1.13 2003/05/15 20:08:30 jwp Exp $";
 
 /*
 ** *******************************************************************

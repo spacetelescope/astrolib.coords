@@ -1,5 +1,5 @@
 /* file: $RCSfile: astro.h,v $
-** rcsid: $Id: astro.h,v 1.20 2003/05/16 20:59:13 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory

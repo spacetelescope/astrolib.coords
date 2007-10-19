@@ -1,5 +1,5 @@
 /* file: $RCSfile: tpm.c,v $
-** rcsid: $Id: tpm.c,v 1.25 2005/12/28 19:58:22 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: tpm.c,v 1.25 2005/12/28 19:58:22 jwp Exp $";
 
 /*
 ** *******************************************************************

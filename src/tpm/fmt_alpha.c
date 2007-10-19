@@ -1,5 +1,5 @@
 /* file: $RCSfile: fmt_alpha.c,v $
-** rcsid: $Id: fmt_alpha.c,v 1.7 2003/05/15 20:09:26 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: fmt_alpha.c,v 1.7 2003/05/15 20:09:26 jwp Exp $";
 
 /*
 ** *******************************************************************

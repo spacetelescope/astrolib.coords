@@ -1,5 +1,5 @@
 /* file: $RCSfile: times.h,v $
-** rcsid: $Id: times.h,v 1.36 2005/12/12 21:15:53 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory

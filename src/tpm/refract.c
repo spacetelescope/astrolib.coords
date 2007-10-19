@@ -1,5 +1,5 @@
 /* file: $RCSfile: refract.c,v $
-** rcsid: $Id: refract.c,v 1.8 2003/11/18 20:13:05 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: refract.c,v 1.8 2003/11/18 20:13:05 jwp Exp $";
 
 /*
 ** *******************************************************************

@@ -1,5 +1,5 @@
 /* file: $RCSfile: misc.h,v $
-** rcsid: $Id: misc.h,v 1.23 2003/09/22 18:25:38 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory

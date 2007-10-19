@@ -1,5 +1,5 @@
 /* file: $RCSfile: delta_AT.c,v $
-** rcsid: $Id: delta_AT.c,v 1.8 2005/07/13 22:50:34 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: delta_AT.c,v 1.8 2005/07/13 22:50:34 jwp Exp $";
 
 /*
 ** *******************************************************************

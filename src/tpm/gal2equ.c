@@ -1,5 +1,5 @@
 /* file: $RCSfile: gal2equ.c,v $
-** rcsid: $Id: gal2equ.c,v 1.8 2003/09/03 20:19:12 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: gal2equ.c,v 1.8 2003/09/03 20:19:12 jwp Exp $";
 
 /*
 ** *******************************************************************

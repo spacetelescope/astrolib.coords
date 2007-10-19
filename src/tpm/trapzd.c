@@ -1,5 +1,5 @@
 /* file: $RCSfile: trapzd.c,v $
-** rcsid: $Id: trapzd.c,v 1.6 2003/09/09 20:58:06 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
@@ -11,7 +11,6 @@
 ** Do not remove or alter any of the lines above.
 ** *******************************************************************
 */
-static char *rcsid = "$Id: trapzd.c,v 1.6 2003/09/09 20:58:06 jwp Exp $";
 
 /*
 ** *******************************************************************

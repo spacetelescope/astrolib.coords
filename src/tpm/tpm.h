@@ -1,5 +1,5 @@
 /* file: $RCSfile: tpm.h,v $
-** rcsid: $Id: tpm.h,v 1.15 2003/05/16 20:58:43 jwp Exp $
+** rcsid: $Id$
 ** Copyright Jeffrey W Percival
 ** *******************************************************************
 ** Space Astronomy Laboratory
