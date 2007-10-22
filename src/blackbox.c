@@ -14,8 +14,7 @@ void blackbox(double x1, double y1, int s1, int s2,
   //  double equinox = J2000;
 
   // Input params are in degrees. Convert them to radians & set things up.
-  double rx1=d2r(x1);
-  double ry1=d2r(y1);
+  // **NB: Always call d2r(x1),d2r(y1) before using them.
 
   v6=v6init(SPHERICAL); // v6=Spherical(lon,lat) #r=FarAway
   v6SetAlpha(v6,d2r(x1));
