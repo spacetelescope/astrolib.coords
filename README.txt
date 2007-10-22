@@ -3,7 +3,7 @@ pertains to coordinate manipulations in an OO framework. Our target user is
 a typical astronomer who needs to analyze data, work with catalogs, prepare
 observing proposals, and prepare for observing runs.
 
-It depends on numarray, which must already be installed on your
+It depends on numpy, which must already be installed on your
 system.
 
 It incorporates the TPM library, graciously contributed by Jeff

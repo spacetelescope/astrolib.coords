@@ -1,3 +1,21 @@
+Version 0.35 converts to numpy and cleans up some build issues.
+
+The following changes have been made:
+  - Coords now uses numpy instead of numarray. Associated
+  documentation has been changed.
+  - Extraneous declarations were stripped from the misc.h file, which
+  were causing build problems on Fedora 7.
+  - Unused variables were stripped from src/blackbox.c and most files
+  in src/tpm.
+  - Files in src/tpm now include. the Subversion $Id$ keyword expansion.
+  
+
+
+
+------------------------------------------------------------
+Prior release notes are included below
+------------------------------------------------------------
+
 Version 0.3 expands support for time specification in AstroDate and Position.
 
 The following changes have been made:
@@ -16,8 +34,6 @@ The following changes have been made:
    distribution and documentation. The package import statements were
    also trimmed down to avoid unnecessarily cluttering the namespace.
 
-------------------------------------------------------------
-Prior release notes are included below
 ------------------------------------------------------------
  
 Version 0.25 is a bugfix release of the coords package.

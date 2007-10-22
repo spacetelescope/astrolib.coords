@@ -392,7 +392,7 @@ class Hmsdms(Coord):
 
     @ivar a1: longitude in hours, minutes, seconds
     @ivar a2: latitude in degrees, minutes, seconds
-    @type a1,a2: Numarray[int,int,float]
+    @type a1,a2: Numpy[int,int,float]
     """
     def __init__(self,input):
         """
@@ -510,7 +510,8 @@ def gcdist(vec1, vec2):
     output great circle distance in radians.
 
     @param vec1,vec2: position in radians
-    @type vec1,vec2: number  
+    @type vec1: number
+    @type vec2: number
 
     @rtype: great circle distance in radians
     
