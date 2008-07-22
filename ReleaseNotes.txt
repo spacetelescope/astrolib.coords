@@ -1,3 +1,12 @@
+Version 0.36 is a bugfix build:
+
+  - Some not-really-extraneous declarations were restored to
+  misc.h. Thanks to Dr. Jae-Joon Lee for submitting the patch.
+
+------------------------------------------------------------
+Prior release notes are included below
+------------------------------------------------------------
+
 Version 0.35 converts to numpy and cleans up some build issues.
 
 The following changes have been made:
@@ -9,12 +18,6 @@ The following changes have been made:
   in src/tpm.
   - Files in src/tpm now include. the Subversion $Id$ keyword expansion.
   
-
-
-
-------------------------------------------------------------
-Prior release notes are included below
-------------------------------------------------------------
 
 Version 0.3 expands support for time specification in AstroDate and Position.
 

@@ -123,7 +123,7 @@ Percival" in any appropriate publications.
 @see: U{http://www.scipy.org/AstroLibCoordsHome}
 
 @author:  Vicki Laidler
-@version: '0.35 (2007-10-22)'
+@version: '0.36 (2008-07-22)'
 
 
 
@@ -138,8 +138,8 @@ from angsep import AngSep
 from astrodate import AstroDate
 
 
-__version__ = '0.35'      #Release version number only
-__vdate__ = '2007-10-22'   #Date of this version, in this (FITS-style) format
+__version__ = '0.36'      #Release version number only
+__vdate__ = '2008-07-22'   #Date of this version, in this (FITS-style) format
 
 def _test():
     import doctest
