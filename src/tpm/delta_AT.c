@@ -17,6 +17,10 @@
 ** $RCSfile: delta_AT.c,v $
 ** return the difference (TAI - UTC) in seconds.
 ** before 1972 Jan 1, a fixed value of 10 seconds is returned.
+**       THIS FILE MUST BE UPDATED WHENEVER A LEAP SECOND IS ADDED.
+** Compute the MJD of the first date to which the leap second applies
+** and use that as the comparison in the code below.
+**
 ** this is modelled after sla_DAT by P. T. Wallace
 ** *******************************************************************
 */
@@ -76,6 +80,8 @@ delta_AT(double utc)
     if (utc >= 51179.0) dt = 32.0;	/* 1999 Jan 1 */
 
     if (utc >= 53736.0) dt = 33.0;	/* 2006 Jan 1 */
+
+    if (utc >= 54832.0) dt = 33.0;	/* 2009 Jan 1 */
 
     return(dt);
 }
