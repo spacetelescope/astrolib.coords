@@ -37,7 +37,7 @@ tpmsrc.extend(['src/blackbox.c','src/pytpm_wrap.c'])
         
 def dosetup():
     r = setup(name = "coords",
-              version = "0.36",
+              version = "0.37",
               description  = 'Astronomical coordinates & angular separations (OO)',
               fullname     = 'AstroLib Coords',
               license      = 'BSD',

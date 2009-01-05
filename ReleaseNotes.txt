@@ -1,11 +1,14 @@
+Version 0.37 adds the leap second for dates after 1 Jan 2009.
+
+------------------------------------------------------------
+Prior release notes are included below
+------------------------------------------------------------
+
 Version 0.36 is a bugfix build:
 
   - Some not-really-extraneous declarations were restored to
   misc.h. Thanks to Dr. Jae-Joon Lee for submitting the patch.
 
-------------------------------------------------------------
-Prior release notes are included below
-------------------------------------------------------------
 
 Version 0.35 converts to numpy and cleans up some build issues.
 

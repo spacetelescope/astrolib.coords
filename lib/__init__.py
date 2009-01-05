@@ -26,7 +26,7 @@ Example
 
 >>> import coords as C
 >>> print C.__version__
-0.3
+0.37
 >>> #Unit conversions
 >>> ob=C.Position('12:34:45.34 -23:42:32.6')
 >>> ob.hmsdms()
@@ -138,8 +138,8 @@ from angsep import AngSep
 from astrodate import AstroDate
 
 
-__version__ = '0.36'      #Release version number only
-__vdate__ = '2008-07-22'   #Date of this version, in this (FITS-style) format
+__version__ = '0.37'      #Release version number only
+__vdate__ = '2009-01-6'   #Date of this version, in this (FITS-style) format
 
 def _test():
     import doctest
