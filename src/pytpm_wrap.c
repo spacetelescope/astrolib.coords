@@ -1379,12 +1379,12 @@ static swig_module_info swig_module = {swig_types, 4, 0, 0, 0, 0};
 
 #define SWIG_name    "_pytpm"
 
-#include "times.h"
-#include "m3.h"
-#include "v3.h"
-#include "m6.h"
-#include "v6.h"
-#include "tpm.h"
+#include "tpm/times.h"
+#include "tpm/m3.h"
+#include "tpm/v3.h"
+#include "tpm/m6.h"
+#include "tpm/v6.h"
+#include "tpm/tpm.h"
 
 
   /*@/data/gaudete1/pkg//share/swig/1.3.25/python/pymacros.swg,66,SWIG_define@*/

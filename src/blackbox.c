@@ -1,4 +1,4 @@
-#include "astro.h"
+#include "tpm/astro.h"
 
 
 void blackbox(double x1, double y1, int s1, int s2,

@@ -4,12 +4,12 @@
 
 // Headers: these just include the corresponding .h files
 %{
-#include "times.h"
-#include "m3.h"
-#include "v3.h"
-#include "m6.h"
-#include "v6.h"
-#include "tpm.h"
+#include "tpm/times.h"
+#include "tpm/m3.h"
+#include "tpm/v3.h"
+#include "tpm/m6.h"
+#include "tpm/v6.h"
+#include "tpm/tpm.h"
 %}
 
 // Define some (but not all) of the useful macros
