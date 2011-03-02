@@ -2,7 +2,7 @@ import astrodate as A
 
 def test_jd():
     """ GIven a julian decimal year, convert it to JD """
-    # this test is failing.  
+    # this test is failing.
     #
     # The constant in ../src/tpm/times.h is 2445700.5 not .0
     #
@@ -19,7 +19,7 @@ def test_jd():
     print type(ans), ans, type(j1984), j1984
     assert ans==j1984, "Fail: right = %f ans = %f"%(j1984,ans)
 
-def test_inverse(epsilon):
+def test_inverse():
     """ See if a round trip works """
     epsilon = 0.0000000001
     d1=A.AstroDate(1997.123)
@@ -57,7 +57,7 @@ def test_bcase():
 def test_repr():
     d1=A.AstroDate('J2003.4')
     assert d1.__repr__() == 'J2003.4', "repr failed: right %s ans %s"%(d1,'J2003.4')
-    
+
 def test_equals():
     d1=A.AstroDate('J1993.123')
     d2=A.AstroDate('J1993.123')
@@ -67,7 +67,7 @@ def test_lt():
     d1=A.AstroDate('J2004.9')
     d2=A.AstroDate('J1950.3')
     assert d2.__lt__(d1), "lt fails"
-    
+
 def test_gt():
     d1=A.AstroDate('J2004.9')
     d2=A.AstroDate('J1950.3')
@@ -77,12 +77,12 @@ def test_le():
     d1=A.AstroDate('J2004.9')
     d2=A.AstroDate('J1950.3')
     assert d2.__le__(d1), "lt fails"
-    
+
 def test_ge():
     d1=A.AstroDate('J2004.9')
     d2=A.AstroDate('J1950.3')
     assert d1.__ge__(d2), "gt fails"
-    
+
 def test_bequals():
     d1=A.AstroDate('B1993.123')
     d2=A.AstroDate('B1993.123')
@@ -92,7 +92,7 @@ def test_blt():
     d1=A.AstroDate('B2004.9')
     d2=A.AstroDate('B1950.3')
     assert d2.__lt__(d1), "lt fails"
-    
+
 def test_bgt():
     d1=A.AstroDate('B2004.9')
     d2=A.AstroDate('B1950.3')
@@ -102,7 +102,7 @@ def test_ble():
     d1=A.AstroDate('B2004.9')
     d2=A.AstroDate('B1950.3')
     assert d2.__le__(d1), "lt fails"
-    
+
 def test_bge():
     d1=A.AstroDate('B2004.9')
     d2=A.AstroDate('B1950.3')
@@ -112,7 +112,7 @@ def test_crosscomp():
     d1=A.AstroDate('J2004.5')
     d2=A.AstroDate('B1956.8')
     assert d1.__ge__(d2), "crosscomp fails"
- 
+
 def run():
     test_jcase()
     test_jdcase()

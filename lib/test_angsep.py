@@ -36,7 +36,7 @@ def test_eq_sep():
 def test_gt_num():
     s2=angsep.AngSep(7)
     assert s2 > 3, "gt failed"
-    
+
 def test_lt_num():
     s2=angsep.AngSep(7)
     assert s2 < 10, "lt failed"
@@ -57,7 +57,7 @@ def test_addnum():
     s1=angsep.AngSep(3)
     s2=s1+5
     assert s2.value == s1.value + 5, "addnum failed"
-    
+
 def test_subtractsep():
     s1=angsep.AngSep(3)
     s2=angsep.AngSep(5)
@@ -68,7 +68,7 @@ def test_subtractnum():
     s1=angsep.AngSep(30)
     s2=s1-5
     assert s2.value == s1.value - 5, "subtractnum failed"
-    
+
 
 #def test_iaddsep():
     #s1=angsep.AngSep(3)
@@ -81,7 +81,7 @@ def test_subtractnum():
     #s1=angsep.AngSep(3)
     #s1.__iadd__(5)
     #assert s1.value == 8, "iaddnum failed"
-    
+
 #def test_isubtractsep():
     #s1=angsep.AngSep(30)
     #s2=angsep.AngSep(5)
@@ -104,7 +104,7 @@ def test_mulnum():
     s1 = angsep.AngSep(10)
     s2=s1*3
     assert s2.value == s1.value * 3, "mulnum failed"
-                       
+
 #.............................................................
 def test_approx_sep():
     s1=angsep.AngSep(22,units='deg')
@@ -138,30 +138,27 @@ def run():
     test_gt_sep()
     test_lt_sep()
     test_eq_sep()
-    
+
     test_gt_num()
     test_lt_num()
     test_eq_num()
-    
+
     test_addsep()
     test_addnum()
     test_subtractsep()
     test_subtractnum()
-    
+
     test_mulsep()
     test_mulnum()
 
     test_approx_sep()
     test_approx_num()
     test_approx_bug()
-    
+
     test_setunit()
-    
+
     #test_iaddsep()
     #test_iaddnum()
     #test_isubtractsep()
     #test_isubtractnum()
 
-if __name__ == '__main__':
-    runem()
-    print "Completed successfully"

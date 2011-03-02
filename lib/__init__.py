@@ -138,9 +138,24 @@ from angsep import AngSep
 from astrodate import AstroDate
 
 
-__version__ = '0.37'      #Release version number only
+__version__ = '0.37+dev'      #Release version number only
 __vdate__ = '2009-01-6'   #Date of this version, in this (FITS-style) format
 
 def _test():
-    import doctest
-    doctest.testfile('__init__.py')
+    '''use nose to run the coords tests
+    '''
+
+    import nose
+
+    # give a list of the names of modules that contain tests as
+    # strings containing the fully qualified module name.  It does
+    # NOT work to pass the actual module object to nose.
+    nose.run(defaultTest= [ 
+        'coords.test_angsep',
+        'coords.test_astrodate', 
+        'coords.test_tpm',
+        'coords.test'
+        ] 
+    )
+
+test = _test

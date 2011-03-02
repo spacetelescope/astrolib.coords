@@ -4,7 +4,7 @@ class Tvalues:
     def __init__(self,epsilon):
         """ All values were defined by IDL ASTROLIB routines, usually
         euler but also bprecess and jprecess for the precession routines. """
-        
+
         self.epsilon=epsilon
         #gal coords of cel(0,0)
         self.celzero_gal=(96.337272,-60.188553)
@@ -79,7 +79,7 @@ def test_eclarb():
     p1=P.Position(t.arb)
     p2=P.Position(p1.ecliptic())
     assert p2.within(P.Position(t.eclarb),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.eclarb,p2.dd())
-    
+
 def test_galarb():
     t = low_eps
     p1=P.Position(t.arb)
@@ -122,14 +122,14 @@ def test_j2000arbneg():
     p1=P.Position(t.galarbneg,system='galactic')
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.arbneg),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.arbneg,p2.dd())
-    
+
 #.................................
 def test_polaris():
     t = low_eps
     p1=P.Position(t.polaris_j1985,equinox=2446066.25)  #1985.0 - not smart yet)
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.polaris_j2000),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.polaris_j2000,p2.dd())
-                                                                                                        
+
 #...................................................................
 #Add some tests checking the new functionality to compute angular
 #separations between Positions defined in different states
@@ -164,7 +164,7 @@ def test_hmsbad1():
         print "Fail: no error was raised"
     except ValueError:
         pass
-    
+
 
 def test_hmsbad2():
     try:
@@ -179,7 +179,7 @@ def run():
     run_hiprec()
     run_loprec()
     run_noprec()
-    
+
 def run_hiprec():
     test_celzero()
     test_galzero()
@@ -196,7 +196,6 @@ def run_hiprec():
     test_celgal()
     test_bjsep()
 
-    
 def run_loprec():
     test_eclarb()
     test_eclarbneg()
