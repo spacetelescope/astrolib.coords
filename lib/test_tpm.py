@@ -1,4 +1,4 @@
-import position as P
+import coords.position as P
 
 class Tvalues:
     def __init__(self,epsilon):
@@ -34,74 +34,98 @@ class Tvalues:
         self.polaris_j2000=(37.942917, 89.264056)
         self.polaris_j1985=(34.094708, 89.196472)
 
-        
-def test_celzero(t):
+
+# two sample data sets to use in the tests:
+#   low_eps is the standard epsilon
+#   high_eps is for use in tests where the precision can't support
+#       low_eps, but the answer is still ok
+low_eps = Tvalues(0.5)
+high_eps = Tvalues(4.0)
+
+
+def test_celzero():
     """celestial zero -> galactic"""
+    t = low_eps
     p1=P.Position((0.0,0.0))
     p2=P.Position(p1.galactic(),system="galactic")
     assert p2.within(P.Position(t.celzero_gal,system="galactic"),t.epsilon,units='arcsec'), "Fail: right=%s ans=%s"%(t.celzero_gal, p2.dd())
 
-def test_galzero(t):
+def test_galzero():
+    t = low_eps
     p1=P.Position((0.0,0.0),system='galactic')
     p2=P.Position(p1.j2000(),system='celestial')
     assert p2.within(P.Position(t.galzero_cel),t.epsilon,units='arcsec'), "Fail: right = %s ans = %s"%(t.galzero_cel,p2.dd())
 
-def test_bjzero(t):
+def test_bjzero():
+    t = low_eps
     p1=P.Position((0.0,0.0))
     p2=P.Position(p1.b1950())
     assert p2.within(P.Position(t.b1950_zero),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.b1950_zero,p2.dd())
 
-def test_jbzero(t):
+def test_jbzero():
+    t = low_eps
     p1=P.Position((0.0,0.0),equinox='b1950')
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.j2000_zero),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.j2000_zero,p2.dd())
 
-def test_eclzero(t):
+def test_eclzero():
+    t = low_eps
     p1=P.Position((0.0,0.0))
     p2=P.Position(p1.ecliptic())
     assert p2.within(P.Position((0.0,0.0)),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%((0.0,0.0),p2.dd())
 
-def test_eclarb(t):
+def test_eclarb():
+    t = high_eps
     p1=P.Position(t.arb)
     p2=P.Position(p1.ecliptic())
     assert p2.within(P.Position(t.eclarb),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.eclarb,p2.dd())
     
-def test_galarb(t):
+def test_galarb():
+    t = low_eps
     p1=P.Position(t.arb)
     p2=P.Position(p1.galactic())
     assert p2.within(P.Position(t.galarb),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.galarb,p2.dd())
-def test_b1950arb(t):
+
+def test_b1950arb():
+    t = low_eps
     p1=P.Position(t.arb)
     p2=P.Position(p1.b1950())
     assert p2.within(P.Position(t.b1950arb),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.b1950arb,p2.dd())
 
-def test_j2000arb(t):
+def test_j2000arb():
+    t = low_eps
     p1=P.Position(t.galarb,system='galactic')
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.arb),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.arb,p2.dd())
 
 #....................................
-def test_eclarbneg(t):
+def test_eclarbneg():
+    t = high_eps
     p1=P.Position(t.arbneg)
     p2=P.Position(p1.ecliptic())
     assert p2.within(P.Position(t.eclarbneg),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.eclarbneg,p2.dd())
-    
-def test_galarbneg(t):
+
+def test_galarbneg():
+    t = low_eps
     p1=P.Position(t.arbneg)
     p2=P.Position(p1.galactic())
     assert p2.within(P.Position(t.galarbneg),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.galarbneg,p2.dd())
-def test_b1950arbneg(t):
+
+def test_b1950arbneg():
+    t = low_eps
     p1=P.Position(t.arbneg)
     p2=P.Position(p1.b1950())
     assert p2.within(P.Position(t.b1950arbneg),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.b1950arbneg,p2.dd())
 
-def test_j2000arbneg(t):
+def test_j2000arbneg():
+    t = low_eps
     p1=P.Position(t.galarbneg,system='galactic')
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.arbneg),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.arbneg,p2.dd())
     
 #.................................
-def test_polaris(t):
+def test_polaris():
+    t = low_eps
     p1=P.Position(t.polaris_j1985,equinox=2446066.25)  #1985.0 - not smart yet)
     p2=P.Position(p1.j2000())
     assert p2.within(P.Position(t.polaris_j2000),t.epsilon,units='arcsec'),"Fail: right = %s ans = %s"%(t.polaris_j2000,p2.dd())
@@ -110,12 +134,14 @@ def test_polaris(t):
 #Add some tests checking the new functionality to compute angular
 #separations between Positions defined in different states
 
-def test_celgal(t):
+def test_celgal():
+    t = low_eps
     p1=P.Position(t.arb)
     p2=P.Position(t.arb,system='galactic')
     assert p1.angsep(p2) > 0, "Fail: ans = %s"%p1.angsep(p2)
 
-def test_bjsep(t):
+def test_bjsep():
+    t = low_eps
     p1=P.Position(t.arb)
     p2=P.Position(t.arb,equinox='b1950')
     assert p1.angsep(p2) > 0, "Fail: ans = %s"%p1.angsep(p2)
@@ -150,33 +176,30 @@ def test_hmsbad2():
 
 #...................................................................
 def run():
-    run_hiprec(0.5)
-    run_loprec(4)
+    run_hiprec()
+    run_loprec()
     run_noprec()
     
-def run_hiprec(epsilon=0.5):
-    t=Tvalues(epsilon)
-    test_celzero(t)
-    test_galzero(t)
-    test_bjzero(t)
-    test_jbzero(t)
-    test_eclzero(t)
-#    test_eclarb(t)
-    test_galarb(t)
-    test_b1950arb(t)
-    test_j2000arb(t)
-    test_galarbneg(t)
-    test_b1950arbneg(t)
-    test_j2000arbneg(t)
-    test_polaris(t)
-    test_celgal(t)
-    test_bjsep(t)
+def run_hiprec():
+    test_celzero()
+    test_galzero()
+    test_bjzero()
+    test_jbzero()
+    test_eclzero()
+    test_galarb()
+    test_b1950arb()
+    test_j2000arb()
+    test_galarbneg()
+    test_b1950arbneg()
+    test_j2000arbneg()
+    test_polaris()
+    test_celgal()
+    test_bjsep()
 
     
-def run_loprec(epsilon=3):
-    t=Tvalues(epsilon)
-    test_eclarb(t)
-    test_eclarbneg(t)
+def run_loprec():
+    test_eclarb()
+    test_eclarbneg()
 
 def run_noprec():
     test_ddbad()

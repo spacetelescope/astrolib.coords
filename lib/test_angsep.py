@@ -1,6 +1,9 @@
-import angsep
+import coords.angsep as angsep
 import math
+import nose.tools
 
+# not sure what this is... looks like something for interactive use
+@nose.tools.nottest
 def test_init(value, units):
     s=angsep.AngSep(value,units=units)
     assert s.value == value, "Value failed: %f != %f"%(s.value,value)

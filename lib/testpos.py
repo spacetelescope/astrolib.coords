@@ -1,4 +1,4 @@
-import position as P
+import coords.position as P
 
 class Tvalues:
     def __init__(self):

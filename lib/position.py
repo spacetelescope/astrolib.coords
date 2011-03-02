@@ -11,7 +11,8 @@ import numpy as N
 import angsep
 import astrodate #helper class: to be brought inside eventually
 
-import pytpm, pytpm_wrapper
+import coords.pytpm as pytpm
+import coords.pytpm_wrapper as pytpm_wrapper
         
 class Position:
 

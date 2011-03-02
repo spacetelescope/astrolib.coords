@@ -2,13 +2,26 @@ import astrodate as A
 
 def test_jd():
     """ GIven a julian decimal year, convert it to JD """
+    # this test is failing.  
+    #
+    # The constant in ../src/tpm/times.h is 2445700.5 not .0
+    #
+    # the value returned by AstroDate is a float that has rounded
+    # the 0.5 up to 1.0 (but is still a float)
+    #
+    # The value here for j1984 agrees with the converter on the USNO web site for Jan 1 1984.
+    #
+    # Ticket #192
+    #
     j1984=2445700.0
     d=A.AstroDate('J1984.0')
     ans=d.jd
+    print type(ans), ans, type(j1984), j1984
     assert ans==j1984, "Fail: right = %f ans = %f"%(j1984,ans)
 
 def test_inverse(epsilon):
     """ See if a round trip works """
+    epsilon = 0.0000000001
     d1=A.AstroDate(1997.123)
     d2=A.AstroDate('JD%f'%d1.jd)
     assert abs(d1.year-d2.year)<epsilon, "Fail: d1.year %f, d2.year %f"%(d1.year,d2.year)
@@ -108,7 +121,7 @@ def run():
     test_numstringcase()
     test_numstringcase2()
     test_bcase()
-    test_inverse(0.0000000001)
+    test_inverse()
 #    test_jd()
     test_equals()
     test_repr()
