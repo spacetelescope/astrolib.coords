@@ -1,7 +1,0 @@
-include setup.py MANIFEST MANIFEST.in README.txt ReleaseNotes.txt *.py 
-include   lib/pytpm.py
-include src/pytpm_wrap.c
-recursive-include lib *.py *.txt
-recursive-include src tpm/*
-recursive-include doc *.pdf *.txt html
-exclude lib/test*.py lib/jdnow.py 

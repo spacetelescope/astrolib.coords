@@ -16,7 +16,7 @@ positions in the same reference frame, without having to worry about units.
 
 Dependencies
 ============
-numarray
+numpy
 
 pytpm -- a Python wrapper for the TPM library graciously contributed
 by Jeff Percival
@@ -24,7 +24,7 @@ by Jeff Percival
 Example
 =======
 
->>> import coords as C
+>>> import astrolib.coords as C
 >>> print C.__version__
 0.37
 >>> #Unit conversions
@@ -142,8 +142,7 @@ __version__ = '0.37+dev'      #Release version number only
 __vdate__ = '2009-01-6'   #Date of this version, in this (FITS-style) format
 
 def _test():
-    '''use nose to run the coords tests
-    '''
+    """use nose to run the coords tests"""
 
     import nose
 
@@ -151,10 +150,10 @@ def _test():
     # strings containing the fully qualified module name.  It does
     # NOT work to pass the actual module object to nose.
     nose.run(defaultTest= [ 
-        'coords.test_angsep',
-        'coords.test_astrodate', 
-        'coords.test_tpm',
-        'coords.test'
+        'astrolib.coords.tests.test_angsep',
+        'astrolib.coords.tests.test_astrodate', 
+        'astrolib.coords.tests.test_tpm',
+        'astrolib.coords.test'
         ] 
     )
 

@@ -11,9 +11,9 @@ import numpy as N
 import angsep
 import astrodate #helper class: to be brought inside eventually
 
-import coords.pytpm as pytpm
-import coords.pytpm_wrapper as pytpm_wrapper
-        
+import pytpm
+import pytpm_wrapper
+
 class Position:
 
     """ The basic class in the coords library. The Position class is designed
@@ -71,7 +71,7 @@ class Position:
         self._set_tpmstate()
         self._parsecoords()
 
-        
+
     def _set_tpmstate(self):
         """ Define the state for TPM based on equinox and system """
         if self.system == 'galactic':
@@ -90,7 +90,7 @@ class Position:
             else: #arbitrary equinox. assume FK5 for now, but this is bad.
                 self._tpmstate=2
                 self._tpmequinox=astrodate.JulianDate(self.equinox).jd
-        
+
     def details(self):
         """
         @return: system & equinox
@@ -105,7 +105,7 @@ class Position:
         """
 
         return "%s (%s)"%(self.coord.__repr__(),self.units)
-    
+
     def _parsecoords(self):
         """ Convert from input string into internal representation
         (decimal degrees) by invoking the appropriate type of Coord.
@@ -113,15 +113,15 @@ class Position:
         degrees; radians will have to be specified as such.
 
         Legitimate units: hmsdms, decimal degrees, radians
-        
+
             -  hmsdms = "hh:mm:ss.ss -dd:mm:ss.ss"
             -  decimal degrees = (ddd.dd, -ddd.dd)
             -  radians = (rr.rr, rr.rr)
-        
+
         @todo: add support for 3vectors ("xx.xxx yy.yyy zz.zzz")
 
         @rtype: None
-        
+
         """
 
         if type(self.input) == types.StringType:
@@ -139,10 +139,10 @@ class Position:
         self._internal=self.coord._calcinternal()
 ##         if self._tpmstate != pytpm.s06:
 ##             self._internal = self.j2000()
-        
+
 #....................................................................
 # Unit conversions
-           
+
     def dd(self):
         """
         @return: Position in decimal degrees
@@ -156,7 +156,7 @@ class Position:
         r1=self._internal[0]*math.pi/180.0
         r2=self._internal[1]*math.pi/180.0
         return (r1,r2)
-    
+
     def hmsdms(self):
         """
         @return: Position in hms dms
@@ -175,7 +175,7 @@ class Position:
         between two Positions.
 
         @param other: another L{Position}
-        
+
         @return: angular separation
         @rtype: L{angsep.AngSep}
         """
@@ -209,7 +209,7 @@ class Position:
         @type units: string ('arcsec','degrees')
 
         @rtype: Boolean
-        
+
         """
         sep=self.angsep(other)
         sep.setunits(units)
@@ -225,7 +225,7 @@ class Position:
 
         @param timetag: Timetag of returned coordinate
         @type timetag: L{astrodate.AstroDate}
-        
+
         @return: (l,b) tuple in decimal degrees
         @rtype: (float,float)
         """
@@ -245,7 +245,7 @@ class Position:
         x,y=self.dd()
         r,d=pytpm_wrapper.blackbox(x,y,self._tpmstate,pytpm.s06,pytpm.j2000,self._tpmequinox,timetag)
         return r,d
-    
+
     def b1950(self,timetag=None):
         """ Return the position in Mean FK4 B1950 coordinates
 
@@ -261,7 +261,7 @@ class Position:
         return r,d
 
     def ecliptic(self,timetag=None):
-        """ Return the position in IAU 1980 Ecliptic coordinates 
+        """ Return the position in IAU 1980 Ecliptic coordinates
 
         @param timetag: Timetag of returned coordinate
         @type timetag: L{astrodate.AstroDate}
@@ -284,7 +284,7 @@ class Position:
 
         @param endstate: as defined by the TPM state machine
         @type endstate: integer
-        
+
         @param epoch: in Julian date; default J2000
         @type epoch: float
 
@@ -305,13 +305,13 @@ class Position:
         x1,y1=self.dd()
         x2,y2=pytpm_wrapper.blackbox(x1,y1,self._tpmstate,endstate,epoch,equinox,timetag)
         return x2,y2
-    
+
 #-----------------------------------------------------------------
 #Coordinate object
 
 class Coord:
     """General class for subclasses.
-    
+
     A Coord is distinct from a Position by being intrinsically expressed in
     a particular set of units.
 
@@ -328,7 +328,7 @@ class Degrees(Coord):
     """
 
     def __init__(self,input):
-        """        
+        """
         @param input: coordinates in decimal degrees
         @type input: (float,float)
         """
@@ -343,7 +343,7 @@ class Degrees(Coord):
             raise ValueError, "Longitude %f out of range [-180,360]"%self.a1
         if not -90 <= self.a2 <= 90:
             raise ValueError, "Latitude %f out of range [-90,90]"%self.a2
-        
+
     def __repr__(self):
         """ @rtype: string """
         return "%f %f"%(self.a1,self.a2)
@@ -355,7 +355,7 @@ class Degrees(Coord):
         a1=(math.pi/180.0)*self.a1
         a2=(math.pi/180.0)*self.a2
         return a1,a2
-        
+
 class Radians(Coord):
     """Radians coord
 
@@ -387,7 +387,7 @@ class Radians(Coord):
         a1=self.a1*(180.0/math.pi)
         a2=self.a2*(180.0/math.pi)
         return a1,a2
-    
+
 class Hmsdms(Coord):
     """Sexagesimal coord: longitude in hours of time (enforced)
 
@@ -401,7 +401,7 @@ class Hmsdms(Coord):
         @type input: string
 
         """
-        
+
         #First break into two on spaces
         a1,a2=input.split()
         #Then break each one into pieces on colons
@@ -432,14 +432,14 @@ class Hmsdms(Coord):
         else:
             self.a2sign = '+'
 
-        
+
     def __repr__(self):
         """ @rtype: string """
         return "%dh %dm %5.3fs %s%dd %dm %5.3fs"%(self.a1[0],self.a1[1],self.a1[2],self.a2sign,abs(self.a2[0]),abs(self.a2[1]),abs(self.a2[2]))
 
     def _calcinternal(self):
         """Convert hmsdms to decimal degrees
-        
+
         @return: Decimal degrees
         @rtype: (float, float)
 
@@ -447,7 +447,7 @@ class Hmsdms(Coord):
         a1= 15*self.a1[0] +   15*self.a1[1]/60.  +  15*self.a1[2]/3600.
         a2=abs(self.a2[0]) + abs(self.a2[1])/60. + abs(self.a2[2])/3600.
         if self.a2sign == '-': a2 = a2*(-1)
-  
+
         return a1,a2
 
 #---------------------------------------------------------------
@@ -456,7 +456,7 @@ def dms(number):
     """ Convert from decimal to sexagesimal degrees,minutes,seconds
 
     @type number: number
-    
+
     @return: sign,degrees,minutes,seconds
     @rtype: (string,int,int,float)
     """
@@ -465,7 +465,7 @@ def dms(number):
         sign='-'
     else:
         sign='+'
-        
+
     ss=abs(3600.*number)
     mm=abs(60.*number)
     dd=abs(number)
@@ -502,7 +502,7 @@ def ahav(x):
     @rtype: number
 
     """
-    
+
     ans = 2.0 * math.asin(math.sqrt(x))
     return ans
 
@@ -515,7 +515,7 @@ def gcdist(vec1, vec2):
     @type vec2: number
 
     @rtype: great circle distance in radians
-    
+
     @see: U{http://wiki.astrogrid.org/bin/view/Astrogrid/CelestialCoordinates}
     """
     ra1,dec1=vec1

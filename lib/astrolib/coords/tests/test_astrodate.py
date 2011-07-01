@@ -1,4 +1,4 @@
-import astrodate as A
+import astrolib.coords.astrodate as A
 
 def test_jd():
     """ GIven a julian decimal year, convert it to JD """

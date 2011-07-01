@@ -1,4 +1,4 @@
-import coords.position as P
+import astrolib.coords.position as P
 
 class Tvalues:
     def __init__(self,epsilon):

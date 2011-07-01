@@ -1,4 +1,4 @@
-import coords.angsep as angsep
+import astrolib.coords.angsep as angsep
 import math
 import nose.tools
 
