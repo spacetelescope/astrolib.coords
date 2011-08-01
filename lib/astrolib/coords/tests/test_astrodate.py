@@ -13,6 +13,10 @@ def test_jd():
     #
     # Ticket #192
     #
+    from unittest.case import SkipTest
+    raise SkipTest()
+    #
+
     j1984=2445700.0
     d=A.AstroDate('J1984.0')
     ans=d.jd

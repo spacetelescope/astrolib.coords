@@ -5,7 +5,7 @@ import distutils.extension
 import glob
 
 # list of all the packages to be installed
-pkg = [ 'astrolib.coords', 'astrolib' ]
+pkg = [ 'astrolib.coords', 'astrolib', 'astrolib.coords.tests' ]
 
 
 ## This is an explicit list of all the source files in the tpm
