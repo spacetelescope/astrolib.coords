@@ -13,9 +13,11 @@ def test_jd():
     #
     # Ticket #192
     #
-    from unittest.case import SkipTest
+
+    # ok, this test doesn't work - never mind
+    # b.t.w.  Maybe someday we can get the nose pandokia plugin to report skipped tests
+    from nose.plugins.skip import SkipTest
     raise SkipTest()
-    #
 
     j1984=2445700.0
     d=A.AstroDate('J1984.0')
