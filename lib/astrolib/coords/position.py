@@ -14,7 +14,7 @@ import astrodate #helper class: to be brought inside eventually
 import pytpm
 import pytpm_wrapper
 
-class Position:
+class Position(object):
 
     """ The basic class in the coords library. The Position class is designed
     to permit users to define a position and then access many representations
