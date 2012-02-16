@@ -161,7 +161,6 @@ tpm_src = [
 
 src_src = [ 
     'src/blackbox.c',
-    'src/pytpm_wrap.c' 
 
 ]
 
@@ -197,7 +196,7 @@ setupargs = {
     # extension modules written in C:
     #
     'ext_modules' :     [
-                        distutils.extension.Extension( 'astrolib.coords._pytpmmodule',
+                        distutils.extension.Extension( 'astrolib.coords._pytpm',
                             tpm_src + src_src
                             ),
                         ]

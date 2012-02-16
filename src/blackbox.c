@@ -1,5 +1,6 @@
-#include "tpm/astro.h"
+#include <Python.h>
 
+#include "tpm/astro.h"
 
 void blackbox(double x1, double y1, int s1, int s2,
 	      double epoch, double equinox, double timetag,
@@ -36,3 +37,54 @@ void blackbox(double x1, double y1, int s1, int s2,
 
   return;
 }
+
+
+/*
+* here begins the python interface
+*/
+
+static PyObject *
+blackbox_shim(PyObject *self, PyObject *args)
+{
+	double x1;
+	double y1;
+	int s1;
+	int s2;
+	double epoch;
+	double equinox;
+	double timetag;
+	double x2;
+	double y2;
+
+	PyObject *rval;
+
+	if (! PyArg_ParseTuple(args, "ddiiddd", 
+		&x1,&y1,&s1,&s2,&epoch,&equinox,&timetag) )
+		return NULL;
+
+	blackbox(x1, y1, s1, s2, epoch, equinox, timetag, &x2, &y2);
+	rval = Py_BuildValue("dd",x2,y2);
+	return rval;
+}
+
+
+static char *module_documentation = "";
+
+static struct PyMethodDef methods[] = {
+    {"blackbox",    blackbox_shim,    1,    "" },
+    {NULL,        NULL}        /* sentinel */
+};
+
+PyMODINIT_FUNC
+init_pytpm(void)
+{
+    /* Create the module and add the functions */
+    (void) Py_InitModule4("_pytpm", methods,
+        module_documentation,
+        (PyObject *) NULL, PYTHON_API_VERSION);
+
+    /* Check for errors */
+    if (PyErr_Occurred())
+        Py_FatalError("can't initialize module _pytpm");
+}
+
