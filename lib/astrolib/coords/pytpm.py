@@ -1,51 +1,31 @@
-# This file was created automatically by SWIG.
-# Don't modify this file, modify the SWIG interface instead.
-# This file is compatible with both classic and new-style classes.
-
 import _pytpm
 
-def _swig_setattr_nondynamic(self,class_type,name,value,static=1):
-    if (name == "this"):
-        if isinstance(value, class_type):
-            self.__dict__[name] = value.this
-            if hasattr(value,"thisown"): self.__dict__["thisown"] = value.thisown
-            del value.thisown
-            return
-    method = class_type.__swig_setmethods__.get(name,None)
-    if method: return method(self,value)
-    if (not static) or hasattr(self,name) or (name == "thisown"):
-        self.__dict__[name] = value
-    else:
-        raise AttributeError("You cannot add attributes to %s" % self)
-
-def _swig_setattr(self,class_type,name,value):
-    return _swig_setattr_nondynamic(self,class_type,name,value,0)
-
-def _swig_getattr(self,class_type,name):
-    method = class_type.__swig_getmethods__.get(name,None)
-    if method: return method(self)
-    raise AttributeError,name
-
-import types
-try:
-    _object = types.ObjectType
-    _newclass = 1
-except AttributeError:
-    class _object : pass
-    _newclass = 0
-del types
-
-
-b1950 = _pytpm.b1950
-j2000 = _pytpm.j2000
-CJ = _pytpm.CJ
-CB = _pytpm.CB
-s01 = _pytpm.s01
-s02 = _pytpm.s02
-s03 = _pytpm.s03
-s04 = _pytpm.s04
-s05 = _pytpm.s05
-s06 = _pytpm.s06
-
+# the only function defined in _pytpm
 blackbox = _pytpm.blackbox
+
+# These are constants that are supposed to be in astrolib.coords.pytpm
+# These constants used to come from astrolib.coords._pytpm but without
+# swig is it much easier to just define them in python here and then
+# stuff them back into _pytpm.
+b1950   = (2433282.42345905)
+j2000   = (2451545.0)
+CJ      = (36525.0)              # the julian century
+CB      = (36524.21987817305)    # the tropical century at 1900.0
+s01     = 1
+s02     = 2
+s03     = 3
+s04     = 4
+s05     = 5
+s06     = 6
+
+_pytpm.b1950 = b1950 
+_pytpm.j2000 = j2000 
+_pytpm.CJ = CJ 
+_pytpm.CB = CB 
+_pytpm.s01 = s01 
+_pytpm.s02 = s02 
+_pytpm.s03 = s03 
+_pytpm.s04 = s04 
+_pytpm.s05 = s05 
+_pytpm.s06 = s06 
 
