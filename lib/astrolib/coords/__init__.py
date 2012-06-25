@@ -138,7 +138,7 @@ from angsep import AngSep
 from astrodate import AstroDate
 
 
-__version__ = '0.37+dev'      #Release version number only
+__version__ = '0.39'      #Release version number only
 __vdate__ = '2009-01-6'   #Date of this version, in this (FITS-style) format
 
 def _test():
