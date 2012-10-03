@@ -1,70 +1,88 @@
-"""
-Angular separation between two Positions.
-
-Can be defined by hand, or produced by "subtracting" two positions.
-Like L{position.Position}, it will have an internal representation,
-and a variety of user-selected representations.
-
-@author: Vicki Laidler
-
-"""
-
 import math
 
 class AngSep:
     """
-    The AngSep class lets the user compare the angular separation between different L{position.Position}s without having to think too much about units.
+    The AngSep class lets the user compare the angular separation
+    between different `position.Position`s without having to think
+    too much about units.
 
-    Each AngSep object is created with a particular length in a particular set of units. These are then converted into an internal representation which is used for all math and comparisons.
+    Each AngSep object is created with a particular length in a
+    particular set of units. These are then converted into an
+    internal representation which is used for all math and comparisons.
 
-    All unit checks are performed by checking the first few letters of the unit string, to provide more flexibility for the user. (eg, "arc" "arcs" "arcsec" "arcseconds" will all evaluate to arcseconds.)
+    All unit checks are performed by checking the first few letters
+    of the unit string, to provide more flexibility for the user.
+    E.g., "arc", "arcs", "arcsec", and "arcseconds" will all evaluate
+    to arcseconds.
     
-    All math and comparisons can be done either between two AngSep objects, or between an AngSep object and a number. In the latter case, the number is assumed to have the same units as the AngSep object.
+    All math and comparisons can be done either between two AngSep
+    objects, or between an AngSep object and a number. In the latter
+    case, the number is assumed to have the same units as the AngSep
+    object.
 
-    Example:
-    ========
+    Examples
+    --------
+    Default units are arcsec
     
-    >>> #Default units are arcsec
-    >>> a=angsep.AngSep(5)
+    >>> a = angsep.AngSep(5)
     >>> a
     5.000000 arcsec
-    >>> #The usual arithmetic works
-    >>> b=angsep.AngSep(3)
+
+    The usual arithmetic works
+    
+    >>> b = angsep.AngSep(3)
     >>> a+b
     8.000000 arcsec
     >>> a*3
     15.000000 arcsec
 
-    >>> #Use AngSep together with Position
-    >>> p1=P.Position('12:34:45.23 45:43:21.12')
-    >>> p2=P.Position('12:34:47.34 45:43:23.0')
-    >>> sep=p1.angsep(p2)
-    >>> eps=angsep.AngSep(30,units='arcsec')
+    Use AngSep together with Position
+    
+    >>> p1 = P.Position('12:34:45.23 45:43:21.12')
+    >>> p2 = P.Position('12:34:47.34 45:43:23.0')
+    >>> sep = p1.angsep(p2)
+    >>> eps = angsep.AngSep(30,units='arcsec')
     >>> p1.within(p2,eps)
     True
     >>> p2.within(p1,20)
     False
 
-    @note: Angular Separations are inherently positive: negative separations have no physical meaning, and are forbidden.
+    .. note:: Angular Separations are inherently positive: negative
+        separations have no physical meaning, and are forbidden.
 
-    @ivar value: magnitude of the angular separation
-    @type value: number
-    @ivar units: units in which the magnitude is expressed (arcsec, degrees, or radians)
-    @type units: string
-    @ivar _internal: internal representation of the separation
-    @type _internal: number (degrees)
+    Attributes
+    ----------
+    value : number
+        Magnitude of the angular separation.
+
+    units: string
+        Units in which the magnitude is expressed (arcsec, degrees,
+        or radians).
+
+     _internal : number (degrees)
+         Internal representation of the separation.
 
     """
     def __init__(self,value,units='arcsec'):
         """
-        @param value: magnitude of the angular separation
-        @type value: number
-        @param units: arcsec or degrees
-        @type units: string
+        Parameters
+        ----------
+        value : number
+            Magnitude of the angular separation.
 
-        @rtype: AngSep
+        units : string
+            Arcsec or degrees.
 
-        @raise ValueError: if value < 0. Negative separations are physically meaningless and thus forbidden. 
+        Returns
+        -------
+        AngSep
+
+        Raises
+        ------
+        ValueError
+            If value < 0. Negative separations are physically
+            meaningless and thus forbidden.
+    
         """
         if (value < 0):
             raise ValueError, "Separations must be nonnegative: %f < 0"%value
@@ -76,14 +94,27 @@ class AngSep:
             self._calcinternal()
 
     def __repr__(self):
-        """ @rtype: string """
+        """
+        Returns
+        -------
+        string
+
+        """
         return "%f %s"%(self.value,self.units)
 
     def _calcinternal(self):
-        """ Sets the internal representation
-        @raise ValueError: if units are not rad|arcsec|degrees
+        """
+        Sets the internal representation
 
-        @rtype: None
+        Raises
+        ------
+        ValueError
+            If units are not rad|arcsec|degrees
+
+        Returns
+        -------
+        None
+        
         """
         if self.units.startswith('rad'):
             self._internal=(self.value/math.pi)*180.0
@@ -95,14 +126,19 @@ class AngSep:
             raise ValueError,"Invalid units: %s"%self.units
         
     def setunits(self,units):
-        """ Sets the units of the public representation, and converts the publically visible value to those units
-
-        @param units: radians, arcsec, or degrees
-        @type units: string
-
-        @rtype: None
         """
+        Sets the units of the public representation, and converts
+        the publically visible value to those units
+
+        Parameters
+        ----------
+        units : {'radians', 'arcsec', 'degrees'}
+
+        Returns
+        -------
+        None
         
+        """
         if units.startswith('rad'):
             self.value=(self._internal*math.pi)/180.0
         elif units.startswith('arcs'):
@@ -188,15 +224,22 @@ class AngSep:
             
 
     def approx(self,other,epsilon):
-        """ True if "self" and "other" are equal to within "epsilon". "epsilon"  is considered to have the same units as self.
+        """
+        `True` if `self` and `other` are equal to within `epsilon`.
+        `epsilon` is considered to have the same units as `self`.
 
-        @note: This is not implemented as 'abs(self-other)<epsilon' because of the prohibition on negative separations.
+        .. note:: This is not implemented as 'abs(self-other)<epsilon'
+            because of the prohibition on negative separations.
 
-        @type other: AngSep or number (units of self)
-        @type epsilon: AngSep or number (units of self)
-        
+        Parameters
+        ----------
+        other : AngSep or number (units of `self`)
+            
+        epsilon : AngSep or number (units of `self`)
 
-        @rtype: Boolean
+        Returns
+        -------
+        Boolean
 
         """
         #Handle issues of epsilon units
@@ -227,16 +270,28 @@ class AngSep:
     #
     
     def arcsec(self):
-        """ @return: separation in arcsec
-            @rtype: float """
+        """
+        Returns
+        -------
+        Separation in arcsec (float)
+
+        """
         return self._internal*3600.0
 
     def radians(self):
-        """ @return: separation in radians
-            @rtype: float """
+        """
+        Returns
+        -------
+        Separation in radians (float)
+
+        """
         return self._internal*180.0/math.pi
 
     def degrees(self):
-        """ @return: separation in degrees
-            @rtype: float """
+        """
+        Returns
+        -------
+        Separation in degrees (float)
+
+        """
         return self._internal

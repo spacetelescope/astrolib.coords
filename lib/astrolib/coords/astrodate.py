@@ -1,13 +1,14 @@
-""" For more information about astronomical date specifications,
+"""
+For more information about astronomical date specifications,
 consult a reference source such as
-U{this page <http://tycho.usno.navy.mil/systime.html>} provided by
-the US Naval Observatory.
+`this page <http://tycho.usno.navy.mil/systime.html>`_
+provided by the US Naval Observatory.
 
-Constants and formulae in this module were taken from the times.h
-include file of the tpm package by Jeff Percival, to ensure compatibility.
+Constants and formulae in this module were taken from the
+`times.h` include file of the `tpm` package by Jeff Percival,
+to ensure compatibility.
 
 """
-
 import types
 import datetime
 
@@ -20,28 +21,43 @@ MJD_0 = 2400000.5
 
 def jyear2jd(jyear):
     """
-    @param jyear: decimal Julian year
-    @type jyear: float
-    @return: Julian date
-    @rtype: float
+    Parameters
+    ----------
+    jyear : float
+        Decimal Julian year.
+
+    Returns
+    -------
+    Julian date (float)
+    
     """
     return (J2000 + ((jyear)-2000.0)*(CJ/100.0))
 
 def jd2jyear(jd):
     """
-    @return: decimal Julian year
-    @rtype: float
-    @param jd: Julian date
-    @type jd: float
+    Parameters
+    ----------
+    jd : float
+        Julian date
+
+    Returns
+    -------
+    Decimal Julian year (float)
+
     """
     return (2000.0 + ((jd)-J2000)*(100.0/CJ))
 
 def byear2jd(byear):
     """
-    @param byear: decimal Besselian year
-    @type byear: float
-    @return: Julian date
-    @rtype: float
+    Parameters
+    ----------
+    byear : float
+        Decimal Besselian year.
+
+    Returns
+    -------
+    Julian date (float)
+
     """
     return (B1950 + ((byear)-1950.0)*(CB/100.0))
 
@@ -49,18 +65,21 @@ def utc2jd(utc):
     """
     Convert UTC to Julian date.
     
-    Conversion translated from TPM modules utcnow.c and gcal2j.c, which
-    notes that the algorithm to convert from a gregorian proleptic calendar
-    date onto a julian day number is taken from 
-    The Explanatory Supplement to the Astronomical Almanac (1992),
-    section 12.92, equation 12.92-1, page 604.
+    Conversion translated from TPM modules `utcnow.c` and
+    `gcal2j.c`, which notes that the algorithm to convert
+    from a gregorian proleptic calendar date onto a julian
+    day number is taken from The Explanatory Supplement to
+    the Astronomical Almanac (1992), section 12.92, equation
+    12.92-1, page 604.
 
-    @param utc: UTC (Universal Civil Time)
-    @type utc: U{datetime<http://docs.python.org/lib/datetime.html>} object
-    @return: Julian date (to the nearest second)
-    @rtype: float
+    Parameters
+    ----------
+    utc : :py:class:`datetime.datetime` object
+        UTC (Universal Civil Time)
 
-
+    Returns
+    -------
+    Julian date to the nearest second (float)
     
     """
 
@@ -107,7 +126,8 @@ def utc2jd(utc):
     return jd
 
 def AstroDate(datespec=None):
-    """AstroDate can be used as a class for managing astronomical
+    """
+    AstroDate can be used as a class for managing astronomical
     date specifications (despite the fact that it was implemented
     as a factory function) that returns either a BesselDate or a
     JulianDate, depending on the properties of the datespec.
@@ -119,28 +139,36 @@ def AstroDate(datespec=None):
     The philosophy is the same as Position: to enable the user to specify
     the date once and for all, and access it in a variety of styles.
 
-    @param datespec: Date specification as entered by the user. Permissible
-    specifications include:
-         - Julian year: 'J1997', 'J1997.325', 1997.325: return a JulianDate
-         - Besselian year: 'B1950','B1958.432': return a BesselDate
-         - Julian date: 'JD2437241.81', '2437241.81', 2437241.81: return a JulianDate
-         - Modified Julian date: 'MJD37241.31': returns a JulianDate
-         - A U{datetime <http://docs.python.org/lib/datetime.html>} object: return a JulianDate (assumes input time is UTC)
-         - None: returns the current time as a JulianDate
-         
-    @type datespec: string, float, integer,  U{datetime <http://docs.python.org/lib/datetime.html>}, or None
+    Parameters
+    ----------
+    datespec : string, float, integer, :py:class:`datetime.datetime`, or `None`
+        Date specification as entered by the user. Permissible
+        specifications include:
+            - Julian year: 'J1997', 'J1997.325', 1997.325: return a JulianDate
+            - Besselian year: 'B1950','B1958.432': return a BesselDate
+            - Julian date: 'JD2437241.81', '2437241.81', 2437241.81:
+              return a JulianDate
+            - Modified Julian date: 'MJD37241.31': returns a JulianDate
+            - A :py:class:`datetime.datetime` object:
+              return a JulianDate (assumes input time is UTC)
+            - None: returns the current time as a JulianDate
 
-    @rtype: L{JulianDate} or L{BesselDate}
+    Returns
+    -------
+    `JulianDate` or `BesselDate`
 
-    @raise ValueError: Raises an exception if the date specification is a
-    string, but begins with a letter that is not 'B','J','JD', or 'MJD'
-    (case insensitive).
+    Raises
+    ------
+    ValueError
+        Raises an exception if the date specification is a
+        string, but begins with a letter that is not 'B','J','JD',
+        or 'MJD' (case insensitive).
 
-    @todo: Add math functions! Addition, subtraction.
-    @todo: Is there a need to support other date specifications?
-    eg FITS-style dates?
+    .. todo:: Add math functions! Addition, subtraction.
+    .. todo:: Is there a need to support other date specifications?
+        eg FITS-style dates?
+
     """
-
     if datespec is None:
         return JulianDate(datetime.datetime.utcnow())
     
@@ -167,18 +195,20 @@ def AstroDate(datespec=None):
 
 class JulianDate:
     """
-    @ivar year: Decimal Julian year
-    @type year: float
+    Attributes
+    ----------
+    year : float
+        Decimal Julian year.
 
-    @ivar jd: Julian date
-    @type jd: float
+    jd : float
+        Julian date.
 
-    @ivar mjd: Modified Julian Date
-    @type mjd: float
+    mjd : float
+        Modified Julian Date
 
-    @ivar datespec: Date specification as entered by the user
+    datespec : Date specification as entered by the user
+
     """
-
     def __init__(self,datespec):
         self.datespec=datespec
         
@@ -237,7 +267,7 @@ class JulianDate:
         return str(self.datespec)
 
     def __equals__(self,other):
-        """ All comparisons will be done based on jd attribute """
+        """All comparisons will be done based on `jd` attribute."""
         return self.jd == other.jd
 
     def __lt__(self,other):
@@ -253,10 +283,15 @@ class JulianDate:
         return self.jd >= other.jd
     
     def byear(self):
-        """ Return Besselian year based on previously calculated
+        """
+        Return Besselian year based on previously calculated
         julian date.
-        @return: decimal Besselian year
-        @rtype: float
+
+        Returns
+        -------
+        ans : float
+            Decimal Besselian year.
+
         """
         ans=(1950.0 + ((x)-B1950)*(100.0/CB))
         return ans
@@ -264,19 +299,20 @@ class JulianDate:
 
 class BesselDate:
     """
-    @ivar year: Decimal Besselian year
-    @type year: float
+    Attributes
+    ----------
+    year : float
+        Decimal Besselian year
 
-    @ivar jd: Julian date
-    @type jd: float
+    jd : float
+        Julian date
 
-    @ivar mjd: Modified Julian Date
-    @type mjd: float
+    mjd : float
+        Modified Julian Date
 
-    @ivar datespec: Date specification as entered by the user
+    datespec : Date specification as entered by the user
 
     """
-    
     def __init__(self,datespec):
         self.datespec=datespec
         try:
@@ -287,7 +323,7 @@ class BesselDate:
         self.mjd=self.jd-MJD_0
 
     def __equals__(self,other):
-        """ All comparisons will be done based on jd attribute """
+        """All comparisons will be done based on `jd` attribute."""
         return self.jd == other.jd
 
     def __lt__(self,other):
@@ -304,10 +340,15 @@ class BesselDate:
 
 
     def jyear(self):
-        """ Return the julian year using the already-converted
-        julian date
-        @return: Decimal Julian year
-        @rtype: float
+        """
+        Return the julian year using the already-converted
+        julian date.
+
+        Returns
+        -------
+        ans : float
+            Decimal Julian year
+
         """
         ans = jd2jyear(self.jd)
         return ans
