@@ -3,8 +3,8 @@ import math
 class AngSep:
     """
     The AngSep class lets the user compare the angular separation
-    between different `position.Position`s without having to think
-    too much about units.
+    between different `~astrolib.coords.position.Position` without
+    having to think too much about units.
 
     Each AngSep object is created with a particular length in a
     particular set of units. These are then converted into an
@@ -36,7 +36,7 @@ class AngSep:
     >>> a*3
     15.000000 arcsec
 
-    Use AngSep together with Position
+    Use AngSep together with `~astrolib.coords.position.Position`
     
     >>> p1 = P.Position('12:34:45.23 45:43:21.12')
     >>> p2 = P.Position('12:34:47.34 45:43:23.0')
@@ -55,12 +55,12 @@ class AngSep:
     value : number
         Magnitude of the angular separation.
 
-    units: string
+    units : string
         Units in which the magnitude is expressed (arcsec, degrees,
         or radians).
 
-     _internal : number (degrees)
-         Internal representation of the separation.
+    _internal : number (degrees)
+        Internal representation of the separation.
 
     """
     def __init__(self,value,units='arcsec'):
@@ -72,10 +72,6 @@ class AngSep:
 
         units : string
             Arcsec or degrees.
-
-        Returns
-        -------
-        AngSep
 
         Raises
         ------
@@ -110,10 +106,6 @@ class AngSep:
         ------
         ValueError
             If units are not rad|arcsec|degrees
-
-        Returns
-        -------
-        None
         
         """
         if self.units.startswith('rad'):
@@ -133,10 +125,6 @@ class AngSep:
         Parameters
         ----------
         units : {'radians', 'arcsec', 'degrees'}
-
-        Returns
-        -------
-        None
         
         """
         if units.startswith('rad'):
@@ -225,21 +213,19 @@ class AngSep:
 
     def approx(self,other,epsilon):
         """
-        `True` if `self` and `other` are equal to within `epsilon`.
-        `epsilon` is considered to have the same units as `self`.
+        `True` if `self` and `other` are equal to within `epsilon`,
+        which is considered to have the same units as `self`.
 
         .. note:: This is not implemented as 'abs(self-other)<epsilon'
             because of the prohibition on negative separations.
 
         Parameters
         ----------
-        other : AngSep or number (units of `self`)
-            
-        epsilon : AngSep or number (units of `self`)
+        other, epsilon : `AngSep` or number (units of `self`)
 
         Returns
         -------
-        Boolean
+        ans : boolean
 
         """
         #Handle issues of epsilon units
@@ -273,7 +259,8 @@ class AngSep:
         """
         Returns
         -------
-        Separation in arcsec (float)
+        value : float
+            Separation in arcsec.
 
         """
         return self._internal*3600.0
@@ -282,7 +269,8 @@ class AngSep:
         """
         Returns
         -------
-        Separation in radians (float)
+        value : float
+            Separation in radians.
 
         """
         return self._internal*180.0/math.pi
@@ -291,7 +279,8 @@ class AngSep:
         """
         Returns
         -------
-        Separation in degrees (float)
+        value : float
+            Separation in degrees.
 
         """
         return self._internal

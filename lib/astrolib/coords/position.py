@@ -1,10 +1,3 @@
-"""
-NOT SURE HOW TO CONVERT THIS EPYDOC BELOW TO SPHINX
-===================================================
-
-@sort: Position, Coord, Hmsdms, Degrees, Radians
-
-"""
 import types
 import math
 
@@ -23,19 +16,21 @@ class Position(object):
 
     Attributes
     ----------
-    input : the input used to create the Position
+    input
+        The input used to create the Position.
     
     units : {'degrees', 'radians'}
         Unit in which the coords were specified.
 
-    equinox : at which the coordinates were specified
+    equinox : string
+        Equinox at which the coordinates were specified.
     
     system : {'celestial', 'galactic', 'ecliptic'}
 
     _tpmstate : integer
         The TPM state of the position.
 
-    coord : `Coord`
+    coord : `~position.Coord`
         A "smart" representation of the position.
 
     _internal : (float, float)
@@ -60,10 +55,6 @@ class Position(object):
             celestial, galactic, ecliptic, etc
 
         units : {'degrees', 'radians'}
-
-        Returns
-        -------
-        `Position`
 
         """
         self.input=input
@@ -101,7 +92,7 @@ class Position(object):
         Returns
         -------
         ans : string
-            `system` and `equinox`
+            Formatted `system` and `equinox` for printing.
 
         """
         ans=""" System: %s \n Equinox: %s """ %(self.system,self.equinox)
@@ -181,7 +172,8 @@ class Position(object):
         """
         Returns
         -------
-        Position in hms dms (string)
+        value : string
+            Position in hms dms.
 
         """
         a1,a2=self._internal
@@ -199,11 +191,11 @@ class Position(object):
 
         Parameters
         ----------
-        other : another `Position`
+        other : another `~position.Position`
 
         Returns
         -------
-        ans : `angsep.AngSep`
+        ans : `~angsep.AngSep`
             Angular separation.
 
         """
@@ -229,15 +221,13 @@ class Position(object):
         
         Parameters
         ----------
-        other : `Position`
-            Another position
+        other : another `~position.Position`
 
-        epsilon : `angsep.AngSep` or number
+        epsilon : `~angsep.AngSep` or number
             Angular separation.
 
         units : {'arcsec', 'degrees'}
-            Unit of the angular separation, if it is specified
-            as a number.
+            Unit of `epsilon`, if it is specified as a number.
 
         Returns
         -------
@@ -260,7 +250,7 @@ class Position(object):
 
         Parameters
         ----------
-        timetag : `astrodate.AstroDate`
+        timetag : `~astrodate.AstroDate`
             Timetag of returned coordinate.
 
         Returns
@@ -279,7 +269,7 @@ class Position(object):
 
         Parameters
         ----------
-        timetag : `astrodate.AstroDate`
+        timetag : `~astrodate.AstroDate`
             Timetag of returned coordinate.
 
         Returns
@@ -298,7 +288,7 @@ class Position(object):
 
         Parameters
         ----------
-        timetag : `astrodate.AstroDate`
+        timetag : `~astrodate.AstroDate`
             Timetag of returned coordinate.
 
         Returns
@@ -317,7 +307,7 @@ class Position(object):
 
         Parameters
         ----------
-        timetag : `astrodate.AstroDate`
+        timetag : `~astrodate.AstroDate`
             Timetag of returned coordinate.
 
         Returns
@@ -349,7 +339,7 @@ class Position(object):
         equinox : float
             Equinox in Julian date; default is `_tpmequinox`.
 
-        timetag : `astrodate.AstroDate`
+        timetag : `~astrodate.AstroDate`
             Timetag of returned coordinate.
 
         Returns
@@ -628,7 +618,7 @@ def gcdist(vec1, vec2):
 
     Parameters
     ----------
-    vec1, vec2: number
+    vec1, vec2 : number
         Position in radians.
 
     Returns
@@ -636,8 +626,8 @@ def gcdist(vec1, vec2):
     ans : number
         Great circle distance in radians.
 
-    See Also
-    --------
+    References
+    ----------
     http://wiki.astrogrid.org/bin/view/Astrogrid/CelestialCoordinates
     
     """

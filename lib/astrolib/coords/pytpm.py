@@ -18,14 +18,13 @@ s04     = 4
 s05     = 5
 s06     = 6
 
-_pytpm.b1950 = b1950 
-_pytpm.j2000 = j2000 
-_pytpm.CJ = CJ 
-_pytpm.CB = CB 
-_pytpm.s01 = s01 
-_pytpm.s02 = s02 
-_pytpm.s03 = s03 
-_pytpm.s04 = s04 
-_pytpm.s05 = s05 
-_pytpm.s06 = s06 
-
+_pytpm.b1950 = b1950
+_pytpm.j2000 = j2000
+_pytpm.CJ = CJ
+_pytpm.CB = CB
+_pytpm.s01 = s01
+_pytpm.s02 = s02
+_pytpm.s03 = s03
+_pytpm.s04 = s04
+_pytpm.s05 = s05
+_pytpm.s06 = s06

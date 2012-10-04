@@ -1,8 +1,8 @@
 """
-This routine wraps the pytpm.blackbox routine in order to apply
-the longitude convention preferred in coords. All astrolib.coords
-routines should call pytpm_wrapper.blackbox() instead of
-pytpm.blackbox().
+This routine wraps the `pytpm.blackbox` routine in order to apply
+the longitude convention preferred in coords. All `astrolib.coords`
+routines should call `~astrolib.coords.pytpm_wrapper.blackbox`
+instead of `pytpm.blackbox`.
 
 Since pytpm is itself a wrapper for the TPM library, the change
 could have been made there; but the modulo operator in C only
@@ -29,7 +29,7 @@ def blackbox(x,y,instate,outstate,epoch,equinox,timetag=None):
     equinox : float
         Equinox of the position.
 
-    timetag : `astrodate.AstroDate`
+    timetag : `~astrolib.coords.astrodate.AstroDate`
         Timetag of returned coordinate.
 
     Returns

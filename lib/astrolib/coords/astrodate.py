@@ -28,7 +28,8 @@ def jyear2jd(jyear):
 
     Returns
     -------
-    Julian date (float)
+    value : float
+        Julian date.
     
     """
     return (J2000 + ((jyear)-2000.0)*(CJ/100.0))
@@ -38,11 +39,12 @@ def jd2jyear(jd):
     Parameters
     ----------
     jd : float
-        Julian date
+        Julian date.
 
     Returns
     -------
-    Decimal Julian year (float)
+    value : float
+        Decimal Julian year.
 
     """
     return (2000.0 + ((jd)-J2000)*(100.0/CJ))
@@ -56,7 +58,8 @@ def byear2jd(byear):
 
     Returns
     -------
-    Julian date (float)
+    value : float
+        Julian date.
 
     """
     return (B1950 + ((byear)-1950.0)*(CB/100.0))
@@ -75,11 +78,12 @@ def utc2jd(utc):
     Parameters
     ----------
     utc : :py:class:`datetime.datetime` object
-        UTC (Universal Civil Time)
+        UTC (Universal Civil Time).
 
     Returns
     -------
-    Julian date to the nearest second (float)
+    value : float
+        Julian date to the nearest second.
     
     """
 
@@ -139,34 +143,43 @@ def AstroDate(datespec=None):
     The philosophy is the same as Position: to enable the user to specify
     the date once and for all, and access it in a variety of styles.
 
+    .. todo::
+        #. Add math functions! Addition, subtraction.
+        #. Is there a need to support other date specifications?
+           eg FITS-style dates?
+
     Parameters
     ----------
     datespec : string, float, integer, :py:class:`datetime.datetime`, or `None`
-        Date specification as entered by the user. Permissible
-        specifications include:
-            - Julian year: 'J1997', 'J1997.325', 1997.325: return a JulianDate
-            - Besselian year: 'B1950','B1958.432': return a BesselDate
-            - Julian date: 'JD2437241.81', '2437241.81', 2437241.81:
-              return a JulianDate
-            - Modified Julian date: 'MJD37241.31': returns a JulianDate
-            - A :py:class:`datetime.datetime` object:
-              return a JulianDate (assumes input time is UTC)
-            - None: returns the current time as a JulianDate
 
     Returns
     -------
-    `JulianDate` or `BesselDate`
+    value : `~astrolib.coords.astrodate.JulianDate` or `~astrolib.coords.astrodate.BesselDate`
+        Date specification as entered by the user. Permissible specifications include:
+            * Julian year
+                * 'J1997', 'J1997.325', 1997.325
+                * Return a JulianDate
+            * Besselian year
+                * 'B1950','B1958.432'
+                * Return a BesselDate
+            * Julian date
+                * 'JD2437241.81', '2437241.81', 2437241.81
+                * Return a JulianDate
+            * Modified Julian date
+                * 'MJD37241.31'
+                * Return a JulianDate
+            * :py:class:`datetime.datetime` object
+                * Assume input time is UTC
+                * Return a JulianDate
+            * `None`
+                * Return the current time as a JulianDate
 
     Raises
     ------
     ValueError
         Raises an exception if the date specification is a
-        string, but begins with a letter that is not 'B','J','JD',
-        or 'MJD' (case insensitive).
-
-    .. todo:: Add math functions! Addition, subtraction.
-    .. todo:: Is there a need to support other date specifications?
-        eg FITS-style dates?
+        string, but begins with a letter that is not
+        'B','J','JD', or 'MJD' (case insensitive).
 
     """
     if datespec is None:
@@ -206,7 +219,8 @@ class JulianDate:
     mjd : float
         Modified Julian Date
 
-    datespec : Date specification as entered by the user
+    datespec
+        Date specification as entered by the user
 
     """
     def __init__(self,datespec):
@@ -310,7 +324,8 @@ class BesselDate:
     mjd : float
         Modified Julian Date
 
-    datespec : Date specification as entered by the user
+    datespec
+        Date specification as entered by the user
 
     """
     def __init__(self,datespec):

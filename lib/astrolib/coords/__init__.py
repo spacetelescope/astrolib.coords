@@ -1,19 +1,4 @@
-"""
-Package: AstroLib Coords
-
-
-NOT SURE HOW TO CONVERT THESE FROM EPYDOC TO SPHINX
-===================================================
-
-@sort: Position, Coord, Degrees, Hmsdms
-
-@group Classes: position.Position, position.Coord, angsep.Angsep
-@group Modules: position, angsep
-
-@sort: Classes, Modules
-@sort: position, angsep
-
-"""
+"""Package: AstroLib Coords"""
 from position import Position
 from angsep import AngSep
 from astrodate import AstroDate
