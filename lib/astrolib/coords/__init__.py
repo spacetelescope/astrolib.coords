@@ -3,9 +3,7 @@ from position import Position
 from angsep import AngSep
 from astrodate import AstroDate
 
-
-__version__ = '0.39'      #Release version number only
-__vdate__ = '2009-01-6'   #Date of this version, in this (FITS-style) format
+from .version import *
 
 def _test():
     """use nose to run the coords tests"""
