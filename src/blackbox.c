@@ -75,16 +75,40 @@ static struct PyMethodDef methods[] = {
     {NULL,        NULL}        /* sentinel */
 };
 
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef moduledef = {
+    PyModuleDef_HEAD_INIT,
+    "_pytpm",
+    NULL,
+    -1,
+    methods,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+};
+
+PyObject *PyInit__pytpm(void)
+{
+    PyObject *m;
+    m = PyModule_Create(&moduledef);
+
+    /* Check for errors */
+    if (PyErr_Occurred())
+        Py_FatalError("can't initialize module _pytpm");
+
+    return m;
+}
+
+#else
 PyMODINIT_FUNC
 init_pytpm(void)
 {
     /* Create the module and add the functions */
-    (void) Py_InitModule4("_pytpm", methods,
-        module_documentation,
-        (PyObject *) NULL, PYTHON_API_VERSION);
+    (void) Py_InitModule("_pytpm", methods);
 
     /* Check for errors */
     if (PyErr_Occurred())
         Py_FatalError("can't initialize module _pytpm");
 }
-
+#endif

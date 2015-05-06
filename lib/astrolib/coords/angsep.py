@@ -81,7 +81,7 @@ class AngSep:
     
         """
         if (value < 0):
-            raise ValueError, "Separations must be nonnegative: %f < 0"%value
+            raise ValueError("Separations must be nonnegative: %f < 0"%value)
         self.value=value
         self.units=units.lower()
         if units.startswith('deg'):
@@ -115,7 +115,7 @@ class AngSep:
         elif self.units.startswith('deg'):
             pass
         else:
-            raise ValueError,"Invalid units: %s"%self.units
+            raise ValueError("Invalid units: %s"%self.units)
         
     def setunits(self,units):
         """

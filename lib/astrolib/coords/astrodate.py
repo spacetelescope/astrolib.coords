@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 """
 For more information about astronomical date specifications,
 consult a reference source such as
@@ -196,7 +198,7 @@ def AstroDate(datespec=None):
             #it's Julian, one way or another
             return JulianDate(datespec)
         elif dstring[0].isalpha():
-            raise ValueError, "Invalid system specification: must be B, J, JD, or MJD"
+            raise ValueError("Invalid system specification: must be B, J, JD, or MJD")
         else: #it must be a numeric string: assume Julian
             return JulianDate(datespec)
         
@@ -232,7 +234,7 @@ class JulianDate:
             self.mjd=self.jd-MJD_0
             self.year=jd2jyear(self.jd)
             
-        elif type(datespec) is types.StringType:
+        elif type(datespec) == type(''):
             if datespec.upper().startswith('JD'):
                 #it's a julian date
                 self.jd=float(datespec[2:])
@@ -263,7 +265,7 @@ class JulianDate:
                     self.mjd=self.jd+MJD_0
                     self.year=jd2jyear(self.jd)
             else:
-                print "help, we are confused"
+                print("help, we are confused")
                 
         else: #it's a number
             if datespec < 10000:

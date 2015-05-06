@@ -1,4 +1,5 @@
-import _pytpm
+from __future__ import absolute_import
+from . import _pytpm
 
 # the only function defined in _pytpm
 blackbox = _pytpm.blackbox

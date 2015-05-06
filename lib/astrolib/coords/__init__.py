@@ -1,7 +1,8 @@
 """Package: AstroLib Coords"""
-from position import Position
-from angsep import AngSep
-from astrodate import AstroDate
+from __future__ import absolute_import
+from .position import Position
+from .angsep import AngSep
+from .astrodate import AstroDate
 
 from .version import *
 

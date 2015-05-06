@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 """
 This routine wraps the `pytpm.blackbox` routine in order to apply
 the longitude convention preferred in coords. All `astrolib.coords`
@@ -10,8 +12,9 @@ works on integers, so it was simpler to do it in python. Also,
 this leaves pytpm itself as a more transparent wrapper for TPM.
 
 """
-import pytpm
-import astrodate, datetime
+from . import pytpm
+from . import astrodate
+import datetime
 
 def blackbox(x,y,instate,outstate,epoch,equinox,timetag=None):
     """

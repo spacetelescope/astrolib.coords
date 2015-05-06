@@ -2,11 +2,11 @@ import types
 import math
 
 import numpy as N
-import angsep
-import astrodate #helper class: to be brought inside eventually
+from . import angsep
+from . import astrodate #helper class: to be brought inside eventually
 
-import pytpm
-import pytpm_wrapper
+from . import pytpm
+from . import pytpm_wrapper
 
 class Position(object):
     """
@@ -127,7 +127,7 @@ class Position(object):
         None
 
         """
-        if type(self.input) == types.StringType:
+        if type(self.input) == type(''):
             self.coord=Hmsdms(self.input)
 ##         elif len(self.input) == 3:
 ##             self.coord=ThreeVec(self.input)
@@ -137,7 +137,7 @@ class Position(object):
             else:
                 self.coord=Degrees(self.input)
         else:
-            raise ValueError, "Can't parse input %s"%self.input
+            raise ValueError("Can't parse input %s"%self.input)
 
         self._internal=self.coord._calcinternal()
 ##         if self._tpmstate != pytpm.s06:
@@ -200,7 +200,7 @@ class Position(object):
 
         """
         if not isinstance(other,Position):
-            raise ValueError, "angsep only defined for positions"
+            raise ValueError("angsep only defined for positions")
 
         if self._tpmstate != other._tpmstate:
             #convert other state to self state
@@ -396,9 +396,9 @@ class Degrees(Coord):
         #More usual convention is 0<longitude<360
         #Support both this way
         if not -180 <= self.a1 <= 360:
-            raise ValueError, "Longitude %f out of range [-180,360]"%self.a1
+            raise ValueError("Longitude %f out of range [-180,360]"%self.a1)
         if not -90 <= self.a2 <= 90:
-            raise ValueError, "Latitude %f out of range [-90,90]"%self.a2
+            raise ValueError("Latitude %f out of range [-90,90]"%self.a2)
 
     def __repr__(self):
         """
@@ -438,9 +438,9 @@ class Radians(Coord):
         """
         self.a1, self.a2=input
         if not -1*math.pi <= self.a1 <=2*math.pi:
-            raise ValueError, "Longitude %f out of range [0,2pi]"%self.a1
+            raise ValueError("Longitude %f out of range [0,2pi]"%self.a1)
         if not -1*math.pi <= self.a2 <=math.pi:
-            raise ValueError, "Latitude %f out of range [0,2pi]"%self.a2
+            raise ValueError("Latitude %f out of range [0,2pi]"%self.a2)
 
     def __repr__(self):
         """
@@ -490,20 +490,20 @@ class Hmsdms(Coord):
         hh,mm,ss=a1.split(':')
         #Check range
         if not 0 <= int(hh) <= 24:
-            raise ValueError, "Hours %s out of range [0,24]"%hh
+            raise ValueError("Hours %s out of range [0,24]"%hh)
         if not 0 <= int(mm) <= 60:
-            raise ValueError, "Minutes %s out of range [0,60]"%mm
+            raise ValueError("Minutes %s out of range [0,60]"%mm)
         if not 0 <= float(ss) <= 60:
-            raise ValueError, "Seconds %s out of range [0,60]"%ss
+            raise ValueError("Seconds %s out of range [0,60]"%ss)
         self.a1=N.array([int(float(hh)),int(float(mm)),float(ss)])
 
         dd,mm,ss=a2.split(':')
         if not -90 <= int(dd) <= 90:
-            raise ValueError, "Degrees %s out of range [-90,90]"%dd
+            raise ValueError("Degrees %s out of range [-90,90]"%dd)
         if not 0 <= int(mm) <= 60:
-            raise ValueError, "Minutes %s out of range [0,60]"%mm
+            raise ValueError("Minutes %s out of range [0,60]"%mm)
         if not 0 <= float(ss) <= 60:
-            raise ValueError, "Seconds %s out of range [0,60]"%ss
+            raise ValueError("Seconds %s out of range [0,60]"%ss)
 
         self.a2=N.array([int(float(dd)),int(float(mm)),float(ss)])
 
