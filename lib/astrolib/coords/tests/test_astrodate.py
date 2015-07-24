@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import astrolib.coords.astrodate as A
 
 def test_jd():
@@ -22,7 +24,7 @@ def test_jd():
     j1984=2445700.0
     d=A.AstroDate('J1984.0')
     ans=d.jd
-    print type(ans), ans, type(j1984), j1984
+    print(type(ans), ans, type(j1984), j1984)
     assert ans==j1984, "Fail: right = %f ans = %f"%(j1984,ans)
 
 def test_inverse():

@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import astrolib.coords.position as P
 from nose.exc import SkipTest
 
@@ -156,7 +158,7 @@ def test_bjsep():
 def test_ddbad():
     try:
         p1=P.Position((123.4,123.5))
-        print "Fail: no error was raised"
+        print("Fail: no error was raised")
     except ValueError:
         pass
 
@@ -164,7 +166,7 @@ def test_ddbad():
 def test_hmsbad1():
     try:
         p1=P.Position('93:34:43 -34:43:34')
-        print "Fail: no error was raised"
+        print("Fail: no error was raised")
     except ValueError:
         pass
 
@@ -172,7 +174,7 @@ def test_hmsbad1():
 def test_hmsbad2():
     try:
         p1=P.Position('3:34:34 -23:443:34.6')
-        print "Fail: no error was raised"
+        print("Fail: no error was raised")
     except ValueError:
         pass
 
