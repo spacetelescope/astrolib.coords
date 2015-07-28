@@ -54,7 +54,7 @@ def test_posarb_hms():
     t = std_eps
     p=P.Position(t.hms_posarb)
     res=p.dd()
-    assert fuzzy_tuple(res,t.dd_posarb,t.epsilon), "Fail: result = " + `res`
+    assert fuzzy_tuple(res,t.dd_posarb,t.epsilon), "Fail: result = " + repr(res)
 #    print("test_posarb_hms: pass")
 
 def test_posarb_dd():
