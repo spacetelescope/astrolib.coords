@@ -1,3 +1,5 @@
+## NOTE: Superseded by Astropy Coordinates package!
+
 This package aims to provide much of the IDL "astron" functionality that
 pertains to coordinate manipulations in an OO framework. Our target user is
 a typical astronomer who needs to analyze data, work with catalogs, prepare
