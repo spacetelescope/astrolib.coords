@@ -3,6 +3,7 @@ lib/astrolib/coords/version.py
 build/
 dist/
 __pycache__/
+*.egg-info/
 *.o
 *.pyc
 *.swp
