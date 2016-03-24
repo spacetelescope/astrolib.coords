@@ -74,7 +74,7 @@ def test_negarb_hms():
     t = std_eps
     p=P.Position(t.hms_negarb)
     res=p.dd()
-    assert fuzzy_tuple(res,t.dd_negarb,t.epsilon), "Fail: result = " + `res`
+    assert fuzzy_tuple(res,t.dd_negarb,t.epsilon), "Fail: result = " + res
 #    print("test_negarb_hms: pass")
 
 def test_negarb_dd():
