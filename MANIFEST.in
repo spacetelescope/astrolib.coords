@@ -4,4 +4,5 @@ recursive-include * *
 prune doc/build
 prune build
 prune dist
+prune .git
 exclude *.pyc *.pyo
