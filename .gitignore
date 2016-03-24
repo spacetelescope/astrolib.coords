@@ -1,0 +1,7 @@
+RELEASE-VERSION
+build/
+dist/
+__pycache__/
+*.o
+*.pyc
+*.swp
