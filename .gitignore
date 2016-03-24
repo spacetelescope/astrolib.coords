@@ -1,4 +1,5 @@
 RELEASE-VERSION
+lib/astrolib/coords/version.py
 build/
 dist/
 __pycache__/
