@@ -13,7 +13,7 @@ SOURCES = [
 
 git_version = get_git_version()
 with open('lib/astrolib/coords/version.py', 'w') as version_data:
-    version_data.write('__version__ = {0}'.format(git_version))
+    version_data.write("__version__ = '{0}'".format(git_version))
 
 setup(
     name = 'astrolib.coords',
