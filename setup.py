@@ -1,9 +1,15 @@
 #!/usr/bin/env python
+import sys
+sys.path.insert(1, 'recon')
+
 import os
 import fnmatch
+import recon.release
 from setuptools import setup, find_packages, Extension
-from version import get_git_version
 
+
+version = recon.release.get_info()
+recon.release.write_template(version, 'lib/astrolib/coords/')
 
 SOURCES = [
     os.path.join(root, f)
@@ -11,13 +17,9 @@ SOURCES = [
     for f in files if f.endswith('.c')
 ]
 
-git_version = get_git_version()
-with open('lib/astrolib/coords/version.py', 'w') as version_data:
-    version_data.write("__version__ = '{0}'".format(git_version))
-
 setup(
     name = 'astrolib.coords',
-    version = git_version,
+    version = version.pep386,
     author = 'Vicki Laidler',
     author_email = 'help@stsci.edu',
     description = 'Astronomical coordinates & angular separations (OO)',
