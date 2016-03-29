@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-import sys
-sys.path.insert(1, 'recon')
-
 import os
 import fnmatch
 import recon.release
