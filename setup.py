@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import os
 import fnmatch
-import recon.release
+import relic.release
 from setuptools import setup, find_packages, Extension
 
 
-version = recon.release.get_info()
-recon.release.write_template(version, 'lib/astrolib/coords/')
+version = relic.release.get_info()
+relic.release.write_template(version, 'lib/astrolib/coords/')
 
 SOURCES = [
     os.path.join(root, f)
