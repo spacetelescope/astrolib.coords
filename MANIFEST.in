@@ -1,6 +1,8 @@
+include RELIC-INFO
 include *
 recursive-include * *
 prune doc/build
 prune build
 prune dist
+prune .git
 exclude *.pyc *.pyo

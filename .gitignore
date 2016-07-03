@@ -1,0 +1,11 @@
+RELIC-INFO
+relic/
+lib/astrolib/coords/version.py
+build/
+dist/
+__pycache__/
+*.egg-info/
+*.so
+*.o
+*.pyc
+*.swp
